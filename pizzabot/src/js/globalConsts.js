@@ -27,6 +27,10 @@ globalConsts.pages = {
         path: '/Main',
         title: 'Главная страница',
     },
+    personalCab: {
+        path: '/User',
+        title: 'Личный кабинет'
+    },
     loadProducts: {
         path: '/LoadProducts',
         title: 'Работа с запасами',
@@ -38,6 +42,12 @@ globalConsts.pages = {
     changeSystemStatus: {
         path: '/ChangeSystemStatus',
         title: 'Включение/Выключение системы',
+    }
+};
+
+globalConsts.buttons = {
+    logout: {
+        title: 'Выйти из системы',
     }
 };
 

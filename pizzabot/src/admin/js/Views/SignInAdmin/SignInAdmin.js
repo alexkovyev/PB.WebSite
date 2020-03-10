@@ -2,6 +2,10 @@ import React from 'react';
 
 // Redux
 import { connect } from 'react-redux';
+import {
+    changeVisibilityOfLoadingPanel,
+    initContext
+} from 'js/Redux/actions';
 
 // Global
 import globalFuncs from 'js/globalFuncs';
@@ -19,6 +23,8 @@ class SignInAdmin extends React.Component {
         this.state = {
             login: '',
             password: '',
+
+            showErrorMsg: false,
         }
 
         this.handleLoginChanged = this.handleLoginChanged.bind(this);
@@ -43,13 +49,49 @@ class SignInAdmin extends React.Component {
     }
 
     handleSignInClick() {
+        const {
+            login,
+            password
+        } = this.state;
 
+        const {
+            dispatch
+        } = this.props;
+
+        dispatch(changeVisibilityOfLoadingPanel(true));
+        globalFuncs.sendRequest(
+            'POST',
+            '/users/signin',
+            {
+                login,
+                password
+            },
+            (response) => {
+                this.setState(() => {
+                    return {
+                        showErrorMsg: false,
+                    }
+                })
+                dispatch(initContext(response));
+                dispatch(changeVisibilityOfLoadingPanel(false));
+            },
+            (response) => {
+                this.setState(() => {
+                    return {
+                        showErrorMsg: true,
+                    }
+                })
+                dispatch(changeVisibilityOfLoadingPanel(false));
+            }
+        )
     }
 
     render() {
         const {
             login, 
-            password
+            password,
+
+            showErrorMsg
         } = this.state;
 
         return (
@@ -75,16 +117,20 @@ class SignInAdmin extends React.Component {
                                 mask={'+7 (000) 000-00-00'}
                                 placeholder={'Введите номер телефона...'}
                                 value={login}
+                                isValid={!showErrorMsg}
                                 onValueChanged={this.handleLoginChanged}
+                                onEnterKey={this.handleSignInClick}
                             />
                         </div>
                         <div className={'form-group text-left mb-4'}>
                             <label>Пароль:</label>
                             <TextBox 
                                 mode={'password'}
+                                isValid={!showErrorMsg}
                                 placeholder={'Введите пароль...'}
                                 value={password}
                                 onValueChanged={this.handlePasswordChanged}
+                                onEnterKey={this.handleSignInClick}
                             />
                         </div>
                         <Button 

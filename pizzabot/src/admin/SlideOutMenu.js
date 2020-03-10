@@ -125,12 +125,22 @@ class SlideOutMenu extends React.Component {
     renderListItem = (e) => {
         return (
             <div>
-                <div 
-                    onClick={() => { this.menuItemClick(e); }} 
-                    className="pb_slideout_menu_item dx-navigation-item"
-                >
-                    {e.page.title}
-                </div>
+                {e.page && 
+                    <div 
+                        onClick={() => { this.menuItemClick(e); }} 
+                        className={"pb_slideout_menu_item dx-navigation-item " + (window.location.hash.indexOf(e.page.path) !== -1 ? 'font-weight-bold' : '')}
+                    >
+                        {e.page.title}
+                    </div>
+                }
+                {e.button &&
+                    <div
+                        onClick={() => { e.action(); }}
+                        className={"pb_slideout_menu_item dx-navigation-item"}
+                    > 
+                        {e.button.title}
+                    </div>
+                }
             </div>
         );
     }
@@ -170,7 +180,10 @@ class SlideOutMenu extends React.Component {
                                 <ScrollView>
                                     <div className="pb_main_content_holder">
                                         {this.props.menuItems.map((e, i) => {
-                                            return <Route exact key={i} path={e.page.path} component={e.component} />
+                                            if (e.page) {
+                                                return <Route exact key={i} path={e.page.path} component={e.component} />
+                                            }
+                                            return <> </>
                                         })}
                                     </div>
                                 </ScrollView>
