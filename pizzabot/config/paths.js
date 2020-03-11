@@ -77,11 +77,7 @@ const resolveDist = () => {
     switch (envEntryPoint) {
 		case 'admin':
 		default:
-<<<<<<< HEAD
-			return resolveApp('dist/admin');
-=======
 			return resolveApp('../dist/admin');
->>>>>>> master
 	}
 };
 
