@@ -85,7 +85,7 @@ class Main extends Component {
                 />
 
                 {!globalFuncs.getToken() &&
-                    <HashRouter>
+                    <HashRouter hashType={'noslash'}>
                         <Redirect from='/' to='/Home' exact />
                         <Route path={'/Home'} component={HomePage} />
                         <Route path={'/SignIn'} component={SignInAdmin} />

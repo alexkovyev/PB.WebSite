@@ -141,9 +141,15 @@ export function initContext(data) {
         globalFuncs.setUserSession(data.token);
     }
 
-    return {
-        type: INIT_CONTEXT,
-        User: data.context.User,
+    if (data && data.context) {
+        return {
+            type: INIT_CONTEXT,
+            User: data.context.User,
+        } 
+    } else {
+        return {
+            type: ERROR,
+        }
     }
 }
 

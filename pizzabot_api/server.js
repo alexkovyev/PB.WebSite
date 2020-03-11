@@ -9,7 +9,10 @@ const utils = require('./utils');
 const reqs = require('./queries/db_queries');
  
 const app = express();
-const port = process.env.PORT || 4000;
+var port = 2093;
+if (process.argv.length > 2) {
+  port = process.argv[2] * 1;
+}
  
 // enable CORS
 app.use(cors());
@@ -20,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // enable morgan
 app.use(morgan('dev'));
  
- 
+
 //middleware that checks if JWT token exists and verifies it if it does exist.
 //In all future routes, this helps to know if the request is authenticated or not.
 app.use(function (req, res, next) {
@@ -211,6 +214,8 @@ app.get('/verifyToken', function (req, res) {
 
 //#endregion
  
-app.listen(port, () => {
-  console.log('Server started on: ' + port);
-});
+if (port === 4000) {
+  app.listen(port, () => {
+    console.log('Server started on: ' + port);
+  });
+} 

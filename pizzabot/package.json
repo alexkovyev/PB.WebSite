@@ -2,7 +2,7 @@
   "name": "pizzabot",
   "version": "0.0.1",
   "private": true,
-  "homepage": "/Home",
+  "homepage": ".",
   "dependencies": {
     "@babel/core": "7.4.3",
     "@babel/plugin-proposal-optional-chaining": "^7.7.5",
