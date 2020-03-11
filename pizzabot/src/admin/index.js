@@ -9,6 +9,11 @@ import 'devextreme/dist/css/dx.light.css';
 import 'css/index.scss';
 import 'admin/css/admin.index.scss';
 
+<<<<<<< HEAD
+=======
+console.log(process.env.NODE_ENV);
+
+>>>>>>> master
 ReactDOM.render(
     <Root />,
     document.getElementById("root_reactapp")

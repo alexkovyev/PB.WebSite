@@ -2,10 +2,13 @@ import React from 'react';
 
 // Redux
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import {
     changeVisibilityOfLoadingPanel,
     initContext
 } from 'js/Redux/actions';
+=======
+>>>>>>> master
 
 // Global
 import globalFuncs from 'js/globalFuncs';
@@ -23,8 +26,11 @@ class SignInAdmin extends React.Component {
         this.state = {
             login: '',
             password: '',
+<<<<<<< HEAD
 
             showErrorMsg: false,
+=======
+>>>>>>> master
         }
 
         this.handleLoginChanged = this.handleLoginChanged.bind(this);
@@ -49,6 +55,7 @@ class SignInAdmin extends React.Component {
     }
 
     handleSignInClick() {
+<<<<<<< HEAD
         const {
             login,
             password
@@ -84,14 +91,21 @@ class SignInAdmin extends React.Component {
                 dispatch(changeVisibilityOfLoadingPanel(false));
             }
         )
+=======
+
+>>>>>>> master
     }
 
     render() {
         const {
             login, 
+<<<<<<< HEAD
             password,
 
             showErrorMsg
+=======
+            password
+>>>>>>> master
         } = this.state;
 
         return (
@@ -117,20 +131,30 @@ class SignInAdmin extends React.Component {
                                 mask={'+7 (000) 000-00-00'}
                                 placeholder={'Введите номер телефона...'}
                                 value={login}
+<<<<<<< HEAD
                                 isValid={!showErrorMsg}
                                 onValueChanged={this.handleLoginChanged}
                                 onEnterKey={this.handleSignInClick}
+=======
+                                onValueChanged={this.handleLoginChanged}
+>>>>>>> master
                             />
                         </div>
                         <div className={'form-group text-left mb-4'}>
                             <label>Пароль:</label>
                             <TextBox 
                                 mode={'password'}
+<<<<<<< HEAD
                                 isValid={!showErrorMsg}
                                 placeholder={'Введите пароль...'}
                                 value={password}
                                 onValueChanged={this.handlePasswordChanged}
                                 onEnterKey={this.handleSignInClick}
+=======
+                                placeholder={'Введите пароль...'}
+                                value={password}
+                                onValueChanged={this.handlePasswordChanged}
+>>>>>>> master
                             />
                         </div>
                         <Button 

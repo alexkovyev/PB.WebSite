@@ -43,7 +43,6 @@ function getServedPath(appPackageJson) {
   const publicUrl = getPublicUrl(appPackageJson);
   const servedUrl =
     envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
-
   return ensureSlash(servedUrl, true);
 }
 
@@ -78,7 +77,11 @@ const resolveDist = () => {
     switch (envEntryPoint) {
 		case 'admin':
 		default:
+<<<<<<< HEAD
 			return resolveApp('dist/admin');
+=======
+			return resolveApp('../dist/admin');
+>>>>>>> master
 	}
 };
 

@@ -1,0 +1,19 @@
+{
+  "name": "PizzaBot_WebSite",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start-app": "((cd pizzabot && npm install) && npm run build) && (cd pizzabot_api && npm install) && node start-application.js",
+    "start-build": "cd pizzabot && npm run build",
+    "start-dev-build": "cd pizzabot && npm run dev",
+    "start-dev-server": "cd pizzabot_api && node server.js",
+    "start-dev-env": "(cd pizzabot && npm start) & (cd pizzabot_api && node server.js)"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "path": "0.12.7",
+    "express": "4.17.1"
+  }
+}
