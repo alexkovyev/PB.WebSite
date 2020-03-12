@@ -8,7 +8,7 @@
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vadim VZ Zhdanov",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.7.2",

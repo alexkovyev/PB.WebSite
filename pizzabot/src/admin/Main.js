@@ -26,6 +26,7 @@ import ChangeSystemStatus from './js/Views/ChangeSystemStatus/ChangeSystemStatus
 import PersonalCab from './js/Views/PersonalCab/PersonalCab';
 import WashingPoint from './js/Views/WashingPoint/WashingPoint';
 import OutPoints from './js/Views/OutPoints/OutPoints';
+import GenerateDocs from './js/Views/GenerateDocs/GenerateDocs';
 
 // Redux store, actions, helpers.
 import { connect, Provider } from 'react-redux';
@@ -67,6 +68,7 @@ class Main extends Component {
             {page: globalConsts.pages.startCleanning, component: WashingPoint, visible: true, },
             {page: globalConsts.pages.changeSystemStatus, component: ChangeSystemStatus, visible: true, },
             {page: globalConsts.pages.outPoints, component: OutPoints, visible: true, },
+            {page: globalConsts.pages.sendDocs, component: GenerateDocs, visible: true, },
             {page: globalConsts.pages.personalCab, component: PersonalCab, visible: true, },
 
             {button: globalConsts.buttons.logout, action: () => {

@@ -7,8 +7,6 @@
     "runtime~main.js": "/React/dist/admin/static/js/bundle.js",
     "runtime~main.js.map": "/React/dist/admin/static/js/bundle.js.map",
     "index.html": "/React/dist/admin/index.html",
-    "static/media/AcceptIcon.png": "/React/dist/admin/static/media/AcceptIcon.c28a1db6.png",
-    "static/media/EditIcon.png": "/React/dist/admin/static/media/EditIcon.f6eacff2.png",
     "static/media/dxicons.woff2": "/React/dist/admin/static/media/dxicons.1286a19f.woff2",
     "static/media/dxicons.ttf": "/React/dist/admin/static/media/dxicons.147eb6fe.ttf",
     "static/media/dxicons.woff": "/React/dist/admin/static/media/dxicons.2b145cef.woff"

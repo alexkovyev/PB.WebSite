@@ -9,7 +9,9 @@ import globalFuncs from 'js/globalFuncs';
 class WashingPoint extends React.Component {
     render() {
         return (
-            <div>WashingPoint</div>
+            <> 
+            
+            </>
         )
     }
 }

@@ -36,7 +36,7 @@ globalFuncs.sendRequest = function(type, methodName, JSONdata, successFunction, 
 
     switch(type){
         case 'POST': {
-            axios.post(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : '/api'}${methodName}`, body)
+            axios.post(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : ':2093/api'}${methodName}`, body)
             .then(res => {
                 processServiceResult(res, successFunction, errorFunction);
             })
@@ -48,7 +48,7 @@ globalFuncs.sendRequest = function(type, methodName, JSONdata, successFunction, 
             break;
         }
         case 'PUT': {
-            axios.put(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : '/api'}${methodName}`, body)
+            axios.put(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : ':2093/api'}${methodName}`, body)
             .then(res => {
                 processServiceResult(res, successFunction, errorFunction);
             })
@@ -60,7 +60,7 @@ globalFuncs.sendRequest = function(type, methodName, JSONdata, successFunction, 
             break;
         }
         case 'GET': {
-            axios.get(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : '/api'}${methodName}`, body)
+            axios.get(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : ':2093/api'}${methodName}`, body)
             .then(res => {
                 processServiceResult(res, successFunction, errorFunction);
             })
@@ -72,7 +72,7 @@ globalFuncs.sendRequest = function(type, methodName, JSONdata, successFunction, 
             break;
         }
         case 'DELETE': {
-            axios.delete(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : '/api'}${methodName}`, body)
+            axios.delete(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : ':2093/api'}${methodName}`, body)
             .then(res => {
                 processServiceResult(res, successFunction, errorFunction);
             })
