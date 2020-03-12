@@ -24,6 +24,8 @@ import SignInAdmin from './js/Views/SignInAdmin/SignInAdmin';
 import MainInfoPage from './js/Views/MainInfoPage/MainInfoPage';
 import ChangeSystemStatus from './js/Views/ChangeSystemStatus/ChangeSystemStatus';
 import PersonalCab from './js/Views/PersonalCab/PersonalCab';
+import WashingPoint from './js/Views/WashingPoint/WashingPoint';
+import OutPoints from './js/Views/OutPoints/OutPoints';
 
 // Redux store, actions, helpers.
 import { connect, Provider } from 'react-redux';
@@ -62,8 +64,10 @@ class Main extends Component {
     render() {
         const pages = [
             {page: globalConsts.pages.mainPage, component: MainInfoPage, visible: true, },
-            {page: globalConsts.pages.personalCab, component: PersonalCab, visible: true, },
+            {page: globalConsts.pages.startCleanning, component: WashingPoint, visible: true, },
             {page: globalConsts.pages.changeSystemStatus, component: ChangeSystemStatus, visible: true, },
+            {page: globalConsts.pages.outPoints, component: OutPoints, visible: true, },
+            {page: globalConsts.pages.personalCab, component: PersonalCab, visible: true, },
 
             {button: globalConsts.buttons.logout, action: () => {
                 globalFuncs.removeUserSession();

@@ -47,7 +47,7 @@ class HomePage extends React.Component {
                     <div className={'mb-3'}> 
                         {true && 
                             <img 
-                                src={require('themes/images/NoImageIcon.png')} 
+                                src={'/themes/images/NoImageIcon.png'} 
                                 alt={'No image'}
                             />
                         }

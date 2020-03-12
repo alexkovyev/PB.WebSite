@@ -100,7 +100,7 @@ class SignInAdmin extends React.Component {
                     <div className={'mb-3'}> 
                         {true && 
                             <img 
-                                src={require('themes/images/NoImageIcon.png')} 
+                                src={'themes/images/NoImageIcon.png'} 
                                 alt={'No image'}
                             />
                         }
@@ -143,7 +143,7 @@ class SignInAdmin extends React.Component {
                             <div className={'col-1 text-right pr-0'}>
                                 <img 
                                     className={'mt-1'}
-                                    src={require('themes/images/KeyIcon.png')}
+                                    src={'themes/images/KeyIcon.png'}
                                     alt={'Key'}
                                 />
                             </div>

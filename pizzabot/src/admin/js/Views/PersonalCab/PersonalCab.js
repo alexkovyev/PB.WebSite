@@ -263,7 +263,7 @@ class PersonalCab extends React.Component {
                     <div className={'mb-3'}> 
                         {true && 
                             <img 
-                                src={require('themes/images/NoAvatarImage.png')} 
+                                src={'themes/images/NoAvatarImage.png'} 
                                 alt={'No image'}
                             />
                         }
@@ -283,8 +283,8 @@ class PersonalCab extends React.Component {
                             <img 
                                 className={'mt-1 pc_edit_img'}
                                 src={isEditMode 
-                                    ? require('themes/images/AcceptIcon.png')
-                                    : require('themes/images/EditIcon.png')
+                                    ? 'themes/images/AcceptIcon.png'
+                                    : 'themes/images/EditIcon.png'
                                 }
                                 alt={'Key'}
                             />
@@ -303,7 +303,7 @@ class PersonalCab extends React.Component {
                             <div className={'col-1 text-right pr-0'}>
                                 <img 
                                     className={'mt-1 pc_edit_img'}
-                                    src={require('themes/images/CloseIcon.png')}
+                                    src={'themes/images/CloseIcon.png'}
                                     alt={'Key'}
                                 />
                             </div>
