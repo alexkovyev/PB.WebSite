@@ -3,6 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 const paths = require('./paths');
+const {
+  prepareUrls,
+} = require('react-dev-utils/WebpackDevServerUtils');
 
 // Make sure that including paths.js after env.js will read .env variables.
 delete require.cache[require.resolve('./paths')];
@@ -83,7 +86,8 @@ function getClientEnvironment(publicUrl) {
         // For example, <img src={process.env.PUBLIC_URL + '/img/logo.png'} />.
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
-        PUBLIC_URL: publicUrl
+        PUBLIC_URL: process.env.NODE_ENV === 'development-3000' ? path.resolve(__dirname, '../../') : '',
+        IP: prepareUrls(process.env.HTTPS === 'true' ? 'https' : 'http', process.env.HOST || '0.0.0.0', process.env.NODE_ENV === 'development-3000' ? 3000 : 2093).lanUrlForConfig,
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

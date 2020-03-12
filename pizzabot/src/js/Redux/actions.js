@@ -1,4 +1,7 @@
-﻿export const CLEAR_ALL_PAGES_DATA = 'CLEAR_ALL_PAGES_DATA';
+﻿// global
+import globalFuncs from 'js/globalFuncs';
+
+export const CLEAR_ALL_PAGES_DATA = 'CLEAR_ALL_PAGES_DATA';
 export const CLEAR_PAGE_DATA_BY_PAGE_NAME = 'CLEAR_PAGE_DATA_BY_PAGE_NAME';
 
 export const GET_PAGE_DATA_BY_PAGE_NAME = 'GET_PAGE_DATA_BY_PAGE_NAME';
@@ -8,9 +11,11 @@ export const GO_TO_PAGE = 'GO_TO_PAGE';
 
 export const ERROR = 'ERROR';
 
-export const LOAD_PANEL_VISIBLE = 'LOAD_PANEL_VISIBLE'
-export const LOAD_PANEL_INVISIBLE = 'LOAD_PANEL_INVISIBLE'
-export const CLEAR_ALL_LOAD_PANELS = 'CLEAR_ALL_LOAD_PANELS'
+export const LOAD_PANEL_VISIBLE = 'LOAD_PANEL_VISIBLE';
+export const LOAD_PANEL_INVISIBLE = 'LOAD_PANEL_INVISIBLE';
+export const CLEAR_ALL_LOAD_PANELS = 'CLEAR_ALL_LOAD_PANELS';
+
+export const INIT_CONTEXT = 'INIT_CONTEXT';
 
 
 //#region Exchange data between pages
@@ -129,3 +134,23 @@ export function clearAllLoadingPanels(){
 
 //#endregion
 
+//#region Init context
+
+export function initContext(data) {
+    if (data.token) {
+        globalFuncs.setUserSession(data.token);
+    }
+
+    if (data && data.context) {
+        return {
+            type: INIT_CONTEXT,
+            User: data.context.User,
+        } 
+    } else {
+        return {
+            type: ERROR,
+        }
+    }
+}
+
+//#endregion

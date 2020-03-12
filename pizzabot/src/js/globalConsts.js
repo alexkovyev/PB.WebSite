@@ -32,12 +32,30 @@ globalConsts.pages = {
         title: 'Работа с запасами',
     },
     startCleanning: {
-        path: '/StartCleanning',
+        path: '/WashPoint',
         title: 'Запуск мойки',
-    },
+    }, 
     changeSystemStatus: {
         path: '/ChangeSystemStatus',
         title: 'Включение/Выключение системы',
+    },
+    outPoints: {
+        path: '/OutPoints',
+        title: 'Ячейки выдачи',
+    },
+    sendDocs: {
+        path: '/GenerateDocs', 
+        title: 'Отчеты',
+    },
+    personalCab: {
+        path: '/User',
+        title: 'Личный кабинет'
+    },
+};
+
+globalConsts.buttons = {
+    logout: {
+        title: 'Выйти из системы',
     }
 };
 

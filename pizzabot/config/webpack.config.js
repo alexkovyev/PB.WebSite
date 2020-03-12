@@ -54,8 +54,8 @@ module.exports = function (webpackEnv) {
   // In development, we always serve from the root. This makes config easier.
     const publicPath =
         isEnvProduction
-            ? '/dist/' + (process.env.PROJECT_NAME ? process.env.PROJECT_NAME + '/' : '')
-            : isEnvDevelopmentRunTime ? './' : '/dist/' + (process.env.PROJECT_NAME ? process.env.PROJECT_NAME + '/' : '');
+            ? '/React/dist/' + (process.env.PROJECT_NAME ? process.env.PROJECT_NAME + '/' : '')
+            : isEnvDevelopmentRunTime ? './' : '/React/dist/' + (process.env.PROJECT_NAME ? process.env.PROJECT_NAME + '/' : '');
     console.log(`PublicPath for this project is ${publicPath}. process.env.PROJECT_NAME=${process.env.PROJECT_NAME}`);
   // Some apps do not use client-side routing with pushState.
   // For these, "homepage" can be set to "." to enable relative asset paths.

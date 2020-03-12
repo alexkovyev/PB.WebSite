@@ -28,7 +28,13 @@ import {
 } from './actions';
 
 //#endregion
+//#region Init context: IMPORT
 
+import {
+    INIT_CONTEXT,
+} from './actions'
+
+//#endregion
 
 //#region Exchange data between page
 
@@ -91,10 +97,29 @@ function visibilityOfLoadingPanel(state = {isLoading: true}, action) {
 
 //#endregion
 
+//#region Init context
+
+function initializedContext(state = {}, action) {
+    switch(action.type) {
+        case INIT_CONTEXT: {
+            delete action['type'];
+            return Object.assign(
+                state,
+                action,
+            )
+        }
+        default: 
+            return state;
+    }
+}
+
+//#endregion
+
 const rootReducer = combineReducers({
     dataForPage,
     goToPage,
     visibilityOfLoadingPanel,
+    initializedContext,
     error,
 });
 
