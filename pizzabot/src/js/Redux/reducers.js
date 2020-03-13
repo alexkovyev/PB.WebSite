@@ -32,6 +32,7 @@ import {
 
 import {
     INIT_CONTEXT,
+    UNMOUNT_CONTEXT,
 } from './actions'
 
 //#endregion
@@ -107,6 +108,9 @@ function initializedContext(state = {}, action) {
                 state,
                 action,
             )
+        }
+        case UNMOUNT_CONTEXT: {
+            return {};
         }
         default: 
             return state;

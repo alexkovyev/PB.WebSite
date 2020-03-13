@@ -41,7 +41,7 @@ globalConsts.pages = {
     },
     outPoints: {
         path: '/OutPoints',
-        title: 'Ячейки выдачи',
+        title: 'Окно выдачи',
     },
     sendDocs: {
         path: '/GenerateDocs', 
@@ -58,6 +58,15 @@ globalConsts.buttons = {
         title: 'Выйти из системы',
     }
 };
+
+//#endregion
+
+//#region Type of operations
+
+globalConsts.operationTypes = {
+    washing: 'WASHING',
+    load_stff: 'LOAD_STFF',
+}
 
 //#endregion
 

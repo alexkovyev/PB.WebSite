@@ -16,6 +16,7 @@ export const LOAD_PANEL_INVISIBLE = 'LOAD_PANEL_INVISIBLE';
 export const CLEAR_ALL_LOAD_PANELS = 'CLEAR_ALL_LOAD_PANELS';
 
 export const INIT_CONTEXT = 'INIT_CONTEXT';
+export const UNMOUNT_CONTEXT = 'UNMOUNT_CONTEXT';
 
 
 //#region Exchange data between pages
@@ -150,6 +151,13 @@ export function initContext(data) {
         return {
             type: ERROR,
         }
+    }
+}
+
+export function unmountContext() {
+    globalFuncs.removeUserSession();
+    return {
+        type: UNMOUNT_CONTEXT,
     }
 }
 

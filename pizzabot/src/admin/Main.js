@@ -33,6 +33,7 @@ import { connect, Provider } from 'react-redux';
 import configureStore from 'js/Redux/configureStore';
 import {
     initContext,
+    unmountContext,
     changeVisibilityOfLoadingPanel,
 } from 'js/Redux/actions';
 
@@ -57,6 +58,7 @@ class Main extends Component {
                 dispatch(changeVisibilityOfLoadingPanel(false));
             },
             (response) => {
+                dispatch(unmountContext());
                 dispatch(changeVisibilityOfLoadingPanel(false));
             }
         );
@@ -72,7 +74,10 @@ class Main extends Component {
             {page: globalConsts.pages.personalCab, component: PersonalCab, visible: true, },
 
             {button: globalConsts.buttons.logout, action: () => {
-                globalFuncs.removeUserSession();
+                const { 
+                    dispatch
+                } = this.props;
+                dispatch(unmountContext());
                 window.location.reload();
             }, visible: true, },
         ];
@@ -80,7 +85,10 @@ class Main extends Component {
         //Redux
         const {
             isLoading,
+            context
         } = this.props;
+
+        const token = globalFuncs.getToken();
 
         return (
             <>
@@ -90,17 +98,17 @@ class Main extends Component {
                     visible={false}
                 />
 
-                {!globalFuncs.getToken() &&
+                {!token && !context.User &&
                     <HashRouter hashType={'noslash'}>
                         <Redirect from='/' to='/Home' exact />
                         <Route path={'/Home'} component={HomePage} />
                         <Route path={'/SignIn'} component={SignInAdmin} />
                     </HashRouter>
                 }
-                {globalFuncs.getToken() && 
+                {token && context.User && 
                     <SlideOutMenu 
                         menuItems={pages}
-                        defaultPage={'Main'}
+                        defaultPage={'WashPoint'}
                     />
                 }
             </>

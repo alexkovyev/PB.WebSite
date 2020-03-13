@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const api = require('./pizzabot_api/prod-server');
+const api = require('./pizzabot_api/server');
 const PORT = process.env.PORT || 2093;
 
 const app = express();
