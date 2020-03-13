@@ -3,18 +3,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const api = require('./pizzabot_api/prod-server');
+const api = require('./pizzabot_api/server');
 const PORT = process.env.PORT || 2093;
 
 const app = express();
 
-// enable CORS
+// enable cors
 app.use(cors());
 // parse application/json
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/themes', express.static(path.join(__dirname, 'themes')));
 app.use('/React/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/api', api);
 

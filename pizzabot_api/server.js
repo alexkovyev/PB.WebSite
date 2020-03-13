@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // enable morgan
 app.use(morgan('dev'));
+const router = express.Router(); 
  
 
 //middleware that checks if JWT token exists and verifies it if it does exist.
@@ -48,7 +49,7 @@ app.use(function (req, res, next) {
 });
  
 // request handlers
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   if (!req.context) return res.status(401).json({ Error: {success: false, text: 'Invalid user to access it.', }});
 });
 
@@ -58,7 +59,7 @@ app.get('/', (req, res) => {
 const contexts = {};
 
 // validate the user credentials
-app.post('/users/signin', function (req, res) {
+router.post('/users/signin', function (req, res) {
   const user = req.body.login;
   const pwd = req.body.password;
 
@@ -109,7 +110,7 @@ app.post('/users/signin', function (req, res) {
   );
 });
 
-app.post('/users/update', function (req, res) {
+router.post('/users/update', function (req, res) {
   const refid = req.body.refid;
   const userfn = req.body.userfn;
   const usersn = req.body.usersn;
@@ -121,8 +122,6 @@ app.post('/users/update', function (req, res) {
   const execby = req.body.execby;
 
   successFunc = (data) => {
-    console.log(data);
-    console.log(data[0]['fn_users_iu']);
     if (data && data.length === 1 && data[0]['fn_users_iu']) {
       contexts[data[0]['fn_users_iu']] = {
         RefID: refid,
@@ -169,7 +168,7 @@ app.post('/users/update', function (req, res) {
     successFunc,
     errorFunc
   );
-})
+});
  
 //#endregion
 
@@ -177,7 +176,7 @@ app.post('/users/update', function (req, res) {
 //#region Token qq
 
 // verify the token and return it if it's valid
-app.get('/verifyToken', function (req, res) {
+router.get('/verifyToken', function (req, res) {
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token;
   if (!token) {
@@ -198,7 +197,7 @@ app.get('/verifyToken', function (req, res) {
     });
  
     // return 401 status if the userId does not match.
-    if (contexts[context.User.RefID].User.RefID !== context.User.RefID) {
+    if (!contexts[context.User.RefID] || contexts[context.User.RefID].User.RefID !== context.User.RefID) {
       return res.status(401).json({
         Error: {
           error: true,
@@ -206,6 +205,7 @@ app.get('/verifyToken', function (req, res) {
         }
       });
     }
+
     // get basic context details
     var contextObj = utils.getCleanContext(contexts[context.User.RefID]);
     return res.status(200).json({ context: contextObj, token });
@@ -214,8 +214,128 @@ app.get('/verifyToken', function (req, res) {
 
 //#endregion
  
+
+//#region Operator qq
+
+router.post('/operator/add_washing_history', function(req, res) {
+  const userrefid = req.body.userrefid;
+  const actiontype = req.body.actiontype;
+  const actioncontent = req.body.actioncontent;
+  const is_content_json = true;
+
+  successFunc = (data) => {
+    if (data && data[0]['fn_operatorhistory_i']) {
+      return res.status(200).json({insertSuccess: true});
+    } else {
+      res.status(200).json({
+        Error: {
+          error: true,
+          text: 'Connection is lost'
+        }
+      })
+    } 
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_add_new_washing',
+    {
+      userrefid,
+      actiontype,
+      actioncontent,
+      is_content_json
+    },
+    successFunc,
+    errorFunc
+  )
+});
+
+router.post('/operator/action_history', function (req, res) {
+  const userrefid = req.body.userrefid;
+  const operationtype = req.body.operationtype;
+  const datefrom = req.body.datefrom;
+  const dateto = req.body.dateto;
+  const is_return_json = true;
+
+  successFunc = (data) => {
+    if (data) {
+      return res.status(200).json({Operations: data});
+    } else {
+      return res.status(200).json({
+        Error: {
+          error: true,
+          text: 'Something was wrong',
+        }
+      })
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_operator_action_history',
+    {
+      userrefid,
+      operationtype,
+      datefrom,
+      dateto,
+      is_return_json,
+    },
+    successFunc,
+    errorFunc
+  )
+});
+
+//#endregion
+
+
+//#region General fns
+
+router.post('/general/typecodes', function (req, res) {
+  const typename = req.body.typename;
+
+  successFunc = (data) => {
+    return res.status(200).json({typeCodeData: data});
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    });
+  };
+
+  reqs.post_data(
+    'post_type_codes',
+    {
+      typename
+    },
+    successFunc,
+    errorFunc
+  );
+});
+
+//#endregion
+
 if (port === 4000) {
+  app.use('/api', router);
   app.listen(port, () => {
     console.log('Server started on: ' + port);
   });
-} 
+} else {
+  module.exports = router;
+}

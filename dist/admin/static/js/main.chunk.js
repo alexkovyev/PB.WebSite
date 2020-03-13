@@ -58,10 +58,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_Views_MainInfoPage_MainInfoPage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/Views/MainInfoPage/MainInfoPage */ "./src/admin/js/Views/MainInfoPage/MainInfoPage.js");
 /* harmony import */ var _js_Views_ChangeSystemStatus_ChangeSystemStatus__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/Views/ChangeSystemStatus/ChangeSystemStatus */ "./src/admin/js/Views/ChangeSystemStatus/ChangeSystemStatus.js");
 /* harmony import */ var _js_Views_PersonalCab_PersonalCab__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/Views/PersonalCab/PersonalCab */ "./src/admin/js/Views/PersonalCab/PersonalCab.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var js_Redux_configureStore__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! js/Redux/configureStore */ "./src/js/Redux/configureStore.js");
-/* harmony import */ var js_globalFuncs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! js/globalFuncs */ "./src/js/globalFuncs.js");
-/* harmony import */ var js_globalConsts__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! js/globalConsts */ "./src/js/globalConsts.js");
+/* harmony import */ var _js_Views_WashingPoint_WashingPoint__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/Views/WashingPoint/WashingPoint */ "./src/admin/js/Views/WashingPoint/WashingPoint.js");
+/* harmony import */ var _js_Views_OutPoints_OutPoints__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/Views/OutPoints/OutPoints */ "./src/admin/js/Views/OutPoints/OutPoints.js");
+/* harmony import */ var _js_Views_GenerateDocs_GenerateDocs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/Views/GenerateDocs/GenerateDocs */ "./src/admin/js/Views/GenerateDocs/GenerateDocs.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var js_Redux_configureStore__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! js/Redux/configureStore */ "./src/js/Redux/configureStore.js");
+/* harmony import */ var js_globalFuncs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! js/globalFuncs */ "./src/js/globalFuncs.js");
+/* harmony import */ var js_globalConsts__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! js/globalConsts */ "./src/js/globalConsts.js");
 
 
 
@@ -82,6 +85,9 @@ var _jsxFileName = "/Users/vz/Library/Mobile Documents/com~apple~CloudDocs/Pizza
 
 
 
+
+
+
  // Redux store, actions, helpers.
 
 
@@ -90,7 +96,7 @@ var _jsxFileName = "/Users/vz/Library/Mobile Documents/com~apple~CloudDocs/Pizza
 
 
 
-var store = Object(js_Redux_configureStore__WEBPACK_IMPORTED_MODULE_17__["default"])();
+var store = Object(js_Redux_configureStore__WEBPACK_IMPORTED_MODULE_20__["default"])();
 
 var Main =
 /*#__PURE__*/
@@ -108,7 +114,7 @@ function (_Component) {
     value: function componentDidMount() {
       var dispatch = this.props.dispatch;
       dispatch(Object(js_Redux_actions__WEBPACK_IMPORTED_MODULE_8__["changeVisibilityOfLoadingPanel"])(true));
-      js_globalFuncs__WEBPACK_IMPORTED_MODULE_18__["default"].sendRequest('GET', "/verifyToken?token=".concat(js_globalFuncs__WEBPACK_IMPORTED_MODULE_18__["default"].getToken()), null, function (response) {
+      js_globalFuncs__WEBPACK_IMPORTED_MODULE_21__["default"].sendRequest('GET', "/verifyToken?token=".concat(js_globalFuncs__WEBPACK_IMPORTED_MODULE_21__["default"].getToken()), null, function (response) {
         dispatch(Object(js_Redux_actions__WEBPACK_IMPORTED_MODULE_8__["initContext"])(response));
         dispatch(Object(js_Redux_actions__WEBPACK_IMPORTED_MODULE_8__["changeVisibilityOfLoadingPanel"])(false));
       }, function (response) {
@@ -119,21 +125,33 @@ function (_Component) {
     key: "render",
     value: function render() {
       var pages = [{
-        page: js_globalConsts__WEBPACK_IMPORTED_MODULE_19__["default"].pages.mainPage,
+        page: js_globalConsts__WEBPACK_IMPORTED_MODULE_22__["default"].pages.mainPage,
         component: _js_Views_MainInfoPage_MainInfoPage__WEBPACK_IMPORTED_MODULE_13__["default"],
         visible: true
       }, {
-        page: js_globalConsts__WEBPACK_IMPORTED_MODULE_19__["default"].pages.personalCab,
-        component: _js_Views_PersonalCab_PersonalCab__WEBPACK_IMPORTED_MODULE_15__["default"],
+        page: js_globalConsts__WEBPACK_IMPORTED_MODULE_22__["default"].pages.startCleanning,
+        component: _js_Views_WashingPoint_WashingPoint__WEBPACK_IMPORTED_MODULE_16__["default"],
         visible: true
       }, {
-        page: js_globalConsts__WEBPACK_IMPORTED_MODULE_19__["default"].pages.changeSystemStatus,
+        page: js_globalConsts__WEBPACK_IMPORTED_MODULE_22__["default"].pages.changeSystemStatus,
         component: _js_Views_ChangeSystemStatus_ChangeSystemStatus__WEBPACK_IMPORTED_MODULE_14__["default"],
         visible: true
       }, {
-        button: js_globalConsts__WEBPACK_IMPORTED_MODULE_19__["default"].buttons.logout,
+        page: js_globalConsts__WEBPACK_IMPORTED_MODULE_22__["default"].pages.outPoints,
+        component: _js_Views_OutPoints_OutPoints__WEBPACK_IMPORTED_MODULE_17__["default"],
+        visible: true
+      }, {
+        page: js_globalConsts__WEBPACK_IMPORTED_MODULE_22__["default"].pages.sendDocs,
+        component: _js_Views_GenerateDocs_GenerateDocs__WEBPACK_IMPORTED_MODULE_18__["default"],
+        visible: true
+      }, {
+        page: js_globalConsts__WEBPACK_IMPORTED_MODULE_22__["default"].pages.personalCab,
+        component: _js_Views_PersonalCab_PersonalCab__WEBPACK_IMPORTED_MODULE_15__["default"],
+        visible: true
+      }, {
+        button: js_globalConsts__WEBPACK_IMPORTED_MODULE_22__["default"].buttons.logout,
         action: function action() {
-          js_globalFuncs__WEBPACK_IMPORTED_MODULE_18__["default"].removeUserSession();
+          js_globalFuncs__WEBPACK_IMPORTED_MODULE_21__["default"].removeUserSession();
           window.location.reload();
         },
         visible: true
@@ -146,14 +164,14 @@ function (_Component) {
         visible: false,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 81
+          lineNumber: 87
         },
         __self: this
-      }), !js_globalFuncs__WEBPACK_IMPORTED_MODULE_18__["default"].getToken() && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["HashRouter"], {
+      }), !js_globalFuncs__WEBPACK_IMPORTED_MODULE_21__["default"].getToken() && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["HashRouter"], {
         hashType: 'noslash',
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 88
+          lineNumber: 94
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Redirect"], {
@@ -162,7 +180,7 @@ function (_Component) {
         exact: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 89
+          lineNumber: 95
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Route"], {
@@ -170,7 +188,7 @@ function (_Component) {
         component: _js_Views_HomePage_HomePage__WEBPACK_IMPORTED_MODULE_11__["default"],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 90
+          lineNumber: 96
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Route"], {
@@ -178,15 +196,15 @@ function (_Component) {
         component: _js_Views_SignInAdmin_SignInAdmin__WEBPACK_IMPORTED_MODULE_12__["default"],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 91
+          lineNumber: 97
         },
         __self: this
-      })), js_globalFuncs__WEBPACK_IMPORTED_MODULE_18__["default"].getToken() && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_SlideOutMenu__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      })), js_globalFuncs__WEBPACK_IMPORTED_MODULE_21__["default"].getToken() && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_SlideOutMenu__WEBPACK_IMPORTED_MODULE_10__["default"], {
         menuItems: pages,
         defaultPage: 'Main',
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 95
+          lineNumber: 101
         },
         __self: this
       }));
@@ -200,7 +218,7 @@ Main.propTypes = {
   isLoading: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.bool.isRequired,
   context: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.object.isRequired
 };
-var MainComponent = Object(react_redux__WEBPACK_IMPORTED_MODULE_16__["connect"])(js_globalFuncs__WEBPACK_IMPORTED_MODULE_18__["default"].mapStateToProps_global)(Main);
+var MainComponent = Object(react_redux__WEBPACK_IMPORTED_MODULE_19__["connect"])(js_globalFuncs__WEBPACK_IMPORTED_MODULE_21__["default"].mapStateToProps_global)(Main);
 
 var Root =
 /*#__PURE__*/
@@ -216,17 +234,17 @@ function (_Component2) {
   Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Root, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_16__["Provider"], {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_19__["Provider"], {
         store: store,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 114
+          lineNumber: 120
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(MainComponent, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 115
+          lineNumber: 121
         },
         __self: this
       }));
@@ -820,6 +838,68 @@ ChangeSystemStatus = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])
 
 /***/ }),
 
+/***/ "./src/admin/js/Views/GenerateDocs/GenerateDocs.js":
+/*!*********************************************************!*\
+  !*** ./src/admin/js/Views/GenerateDocs/GenerateDocs.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var js_globalFuncs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! js/globalFuncs */ "./src/js/globalFuncs.js");
+
+
+
+
+
+var _jsxFileName = "/Users/vz/Library/Mobile Documents/com~apple~CloudDocs/PizzaBot/PizzaBot_WebSite/pizzabot/src/admin/js/Views/GenerateDocs/GenerateDocs.js";
+ // Redux
+
+ // global
+
+
+
+var GenerateDocs =
+/*#__PURE__*/
+function (_React$Component) {
+  Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(GenerateDocs, _React$Component);
+
+  function GenerateDocs() {
+    Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, GenerateDocs);
+
+    return Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(GenerateDocs).apply(this, arguments));
+  }
+
+  Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(GenerateDocs, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 12
+        },
+        __self: this
+      }, "GenerateDocs");
+    }
+  }]);
+
+  return GenerateDocs;
+}(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component);
+
+GenerateDocs = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(js_globalFuncs__WEBPACK_IMPORTED_MODULE_7__["default"].mapStateToProps_global)(GenerateDocs);
+/* harmony default export */ __webpack_exports__["default"] = (GenerateDocs);
+
+/***/ }),
+
 /***/ "./src/admin/js/Views/HomePage/HomePage.js":
 /*!*************************************************!*\
   !*** ./src/admin/js/Views/HomePage/HomePage.js ***!
@@ -913,7 +993,7 @@ function (_React$Component) {
         },
         __self: this
       },  true && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("img", {
-        src: __webpack_require__(/*! themes/images/NoImageIcon.png */ "./src/themes/images/NoImageIcon.png"),
+        src: '/themes/images/NoImageIcon.png',
         alt: 'No image',
         __source: {
           fileName: _jsxFileName,
@@ -1021,6 +1101,68 @@ function (_React$Component) {
 
 MainInfoPage = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(js_globalFuncs__WEBPACK_IMPORTED_MODULE_7__["default"].mapStateToProps_global)(MainInfoPage);
 /* harmony default export */ __webpack_exports__["default"] = (MainInfoPage);
+
+/***/ }),
+
+/***/ "./src/admin/js/Views/OutPoints/OutPoints.js":
+/*!***************************************************!*\
+  !*** ./src/admin/js/Views/OutPoints/OutPoints.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var js_globalFuncs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! js/globalFuncs */ "./src/js/globalFuncs.js");
+
+
+
+
+
+var _jsxFileName = "/Users/vz/Library/Mobile Documents/com~apple~CloudDocs/PizzaBot/PizzaBot_WebSite/pizzabot/src/admin/js/Views/OutPoints/OutPoints.js";
+ // Redux
+
+ // global
+
+
+
+var OutPoints =
+/*#__PURE__*/
+function (_React$Component) {
+  Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(OutPoints, _React$Component);
+
+  function OutPoints() {
+    Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, OutPoints);
+
+    return Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(OutPoints).apply(this, arguments));
+  }
+
+  Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(OutPoints, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 12
+        },
+        __self: this
+      }, "OutPoints");
+    }
+  }]);
+
+  return OutPoints;
+}(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component);
+
+OutPoints = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(js_globalFuncs__WEBPACK_IMPORTED_MODULE_7__["default"].mapStateToProps_global)(OutPoints);
+/* harmony default export */ __webpack_exports__["default"] = (OutPoints);
 
 /***/ }),
 
@@ -1288,7 +1430,7 @@ function (_React$Component) {
         },
         __self: this
       },  true && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("img", {
-        src: __webpack_require__(/*! themes/images/NoAvatarImage.png */ "./src/themes/images/NoAvatarImage.png"),
+        src: '/themes/images/NoAvatarImage.png',
         alt: 'No image',
         __source: {
           fileName: _jsxFileName,
@@ -1333,7 +1475,7 @@ function (_React$Component) {
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("img", {
         className: 'mt-1 pc_edit_img',
-        src: isEditMode ? __webpack_require__(/*! themes/images/AcceptIcon.png */ "./src/themes/images/AcceptIcon.png") : __webpack_require__(/*! themes/images/EditIcon.png */ "./src/themes/images/EditIcon.png"),
+        src: isEditMode ? '/themes/images/AcceptIcon.png' : '/themes/images/EditIcon.png',
         alt: 'Key',
         __source: {
           fileName: _jsxFileName,
@@ -1371,7 +1513,7 @@ function (_React$Component) {
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("img", {
         className: 'mt-1 pc_edit_img',
-        src: __webpack_require__(/*! themes/images/CloseIcon.png */ "./src/themes/images/CloseIcon.png"),
+        src: 'themes/images/CloseIcon.png',
         alt: 'Key',
         __source: {
           fileName: _jsxFileName,
@@ -1884,7 +2026,7 @@ function (_React$Component) {
         },
         __self: this
       },  true && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("img", {
-        src: __webpack_require__(/*! themes/images/NoImageIcon.png */ "./src/themes/images/NoImageIcon.png"),
+        src: '/themes/images/NoImageIcon.png',
         alt: 'No image',
         __source: {
           fileName: _jsxFileName,
@@ -1981,7 +2123,7 @@ function (_React$Component) {
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("img", {
         className: 'mt-1',
-        src: __webpack_require__(/*! themes/images/KeyIcon.png */ "./src/themes/images/KeyIcon.png"),
+        src: '/themes/images/KeyIcon.png',
         alt: 'Key',
         __source: {
           fileName: _jsxFileName,
@@ -2017,6 +2159,61 @@ function (_React$Component) {
 
 SignInAdmin = Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(js_globalFuncs__WEBPACK_IMPORTED_MODULE_9__["default"].mapStateToProps_global)(SignInAdmin);
 /* harmony default export */ __webpack_exports__["default"] = (SignInAdmin);
+
+/***/ }),
+
+/***/ "./src/admin/js/Views/WashingPoint/WashingPoint.js":
+/*!*********************************************************!*\
+  !*** ./src/admin/js/Views/WashingPoint/WashingPoint.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var js_globalFuncs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! js/globalFuncs */ "./src/js/globalFuncs.js");
+
+
+
+
+
+ // Redux
+
+ // global
+
+
+
+var WashingPoint =
+/*#__PURE__*/
+function (_React$Component) {
+  Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(WashingPoint, _React$Component);
+
+  function WashingPoint() {
+    Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, WashingPoint);
+
+    return Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(WashingPoint).apply(this, arguments));
+  }
+
+  Object(_Users_vz_Library_Mobile_Documents_com_apple_CloudDocs_PizzaBot_PizzaBot_WebSite_pizzabot_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(WashingPoint, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, null);
+    }
+  }]);
+
+  return WashingPoint;
+}(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component);
+
+WashingPoint = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(js_globalFuncs__WEBPACK_IMPORTED_MODULE_7__["default"].mapStateToProps_global)(WashingPoint);
+/* harmony default export */ __webpack_exports__["default"] = (WashingPoint);
 
 /***/ }),
 
@@ -2420,21 +2617,29 @@ globalConsts.pages = {
     path: '/Main',
     title: 'Главная страница'
   },
-  personalCab: {
-    path: '/User',
-    title: 'Личный кабинет'
-  },
   loadProducts: {
     path: '/LoadProducts',
     title: 'Работа с запасами'
   },
   startCleanning: {
-    path: '/StartCleanning',
+    path: '/WashPoint',
     title: 'Запуск мойки'
   },
   changeSystemStatus: {
     path: '/ChangeSystemStatus',
     title: 'Включение/Выключение системы'
+  },
+  outPoints: {
+    path: '/OutPoints',
+    title: 'Ячейки выдачи'
+  },
+  sendDocs: {
+    path: '/GenerateDocs',
+    title: 'Отчеты'
+  },
+  personalCab: {
+    path: '/User',
+    title: 'Личный кабинет'
   }
 };
 globalConsts.buttons = {
@@ -2497,30 +2702,19 @@ globalFuncs.sendRequest = function (type, methodName, JSONdata, successFunction,
   switch (type) {
     case 'POST':
       {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://localhost:4000".concat(methodName), body).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://".concat("10.20.3.169").concat( false ? undefined : ':2093/api').concat(methodName), body).then(function (res) {
           processServiceResult(res, successFunction, errorFunction);
         }).catch(function (err) {
           if (!err.isAxiosError) {
             processServiceResult(err.response, successFunction, errorFunction);
           }
         });
-        /*
-        axios.post(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : '/api'}${methodName}`, body)
-        .then(res => {
-            processServiceResult(res, successFunction, errorFunction);
-        })
-        .catch(err => {
-            if (!err.isAxiosError) {
-                processServiceResult(err.response, successFunction, errorFunction);
-            }
-        });*/
-
         break;
       }
 
     case 'PUT':
       {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("http://".concat("10.20.3.169").concat( false ? undefined : '/api').concat(methodName), body).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("http://".concat("10.20.3.169").concat( false ? undefined : ':2093/api').concat(methodName), body).then(function (res) {
           processServiceResult(res, successFunction, errorFunction);
         }).catch(function (err) {
           if (!err.isAxiosError) {
@@ -2532,29 +2726,19 @@ globalFuncs.sendRequest = function (type, methodName, JSONdata, successFunction,
 
     case 'GET':
       {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://localhost:4000".concat(methodName), body).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://".concat("10.20.3.169").concat( false ? undefined : ':2093/api').concat(methodName), body).then(function (res) {
           processServiceResult(res, successFunction, errorFunction);
         }).catch(function (err) {
           if (!err.isAxiosError) {
             processServiceResult(err.response, successFunction, errorFunction);
           }
         });
-        /*axios.get(`http://${process.env.IP}${process.env.NODE_ENV === 'development-3000' ? ':4000' : '/api'}${methodName}`, body)
-        .then(res => {
-            processServiceResult(res, successFunction, errorFunction);
-        })
-        .catch(err => {
-            if (!err.isAxiosError) {
-                processServiceResult(err.response, successFunction, errorFunction);
-            }
-        });*/
-
         break;
       }
 
     case 'DELETE':
       {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete("http://".concat("10.20.3.169").concat( false ? undefined : '/api').concat(methodName), body).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete("http://".concat("10.20.3.169").concat( false ? undefined : ':2093/api').concat(methodName), body).then(function (res) {
           processServiceResult(res, successFunction, errorFunction);
         }).catch(function (err) {
           if (!err.isAxiosError) {
@@ -2600,72 +2784,6 @@ globalFuncs.mapStateToProps_global = function (state) {
 
 
 /* harmony default export */ __webpack_exports__["default"] = (globalFuncs);
-
-/***/ }),
-
-/***/ "./src/themes/images/AcceptIcon.png":
-/*!******************************************!*\
-  !*** ./src/themes/images/AcceptIcon.png ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/media/AcceptIcon.c28a1db6.png";
-
-/***/ }),
-
-/***/ "./src/themes/images/CloseIcon.png":
-/*!*****************************************!*\
-  !*** ./src/themes/images/CloseIcon.png ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAMAAADDpiTIAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAdhxAAHYcQFzn84mAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAv1QTFRF////AQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQACAQAC9p0ocAAAAP50Uk5TAAECAwQFBgcI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"
-
-/***/ }),
-
-/***/ "./src/themes/images/EditIcon.png":
-/*!****************************************!*\
-  !*** ./src/themes/images/EditIcon.png ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/media/EditIcon.f6eacff2.png";
-
-/***/ }),
-
-/***/ "./src/themes/images/KeyIcon.png":
-/*!***************************************!*\
-  !*** ./src/themes/images/KeyIcon.png ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAE0klEQVR4nO2aX4hVRRjAf3ezFmy3LfJP2Lr2j9Lsz0NlueZbbylCaAaGCJutSSKV1EvQQiz0VET/jKRopeilhwhCtrUiXcE/vUV/TCXrxbIe0r3Bunq3h7mn+82553jmzJmZs5frDwYO98x83zffzJ35zjdTYebSCSwGbgPmAVfWf68CfwBHgR+Bc6VY54l5wHZgDPgXmM4oVWAU2AbMLcFeZywFdqNGM6vTaeUcMAIsyaO44sR8e64GhoEtQEfC+2PAD8BJ1IwAmA0sQjnt5oQ2F4B3gBeBfxzb65SVwO80j+S3wGZggYGMBcCTwL4EOb8B/c6tdsQgMIVu8BfAfQVkLgP2xGROAQOFLPXA8+hG/gk84lD+WuC0kF8DdjiUX4hB9M4fBK73oKcXOITuhCc86MnFSvRpPwZ0edTXBexF3yVKWxOuQV/wDuK38xFdwGH0hbEngN4m3kb/z/uY9mn0oq8JrwfUDaj9+oIwwOWCZ8o6of88KsQOxm70ra4sRoUdH4ZSOhc9vC2yzxflfvQFcU4IpduF0n0hFGYwTsOepyE5/nbJavEcbNpdhBHxvDq1liM60T9pTWL7JNYA3wAT9fI19sb3CnuqwBWWcoy4Wyj7xVLGK0JGvAxbyjwuZNxpKcOIR4WizyzaryG981FZZSH3c9F+rc81YL54PmnR/hmDOs9ayJW2XOfTAd3i+axF+3sM6txrIfeMeO72vQv4ZrqoAJ8OkKN+lUX7I47qxJG2nPHpgFPiuc+i/auO6sRZJJ5PpdZywF00VttjljKGSd8BXraUeULIuMNShhGdqGAjUmb7CbwK+Ar1lzqLSnI8bClrobBnAs+BEOhfYJt9KzNgCw179oRQuE0onAkfQwdo2LM1hML45/CyEEpTWC7smASuDaV4hMDTLoUvhR0fhFS8BJWG+j/+Dqm8znqhfwq41ZeiCurgYxf6qv+GMOA06rM0FH3A30L/a74UVYCdQtH74l0PKiUdvTtEmLR4N/Cd0PsrdlFpJvHOTwPPxer0ox+M7MWvE7pR8YPMAz7gQ1FS53eSfPQ+gDqmiuodRgUnrulDH/kasMmDnlydj9iB7oS/UHl7V6xH/8/XsMsbZGLT+YgBmo/HRyk2RZejb3XRtN9UQGYqRTof0Y++MEZlHHWKbLJTLESFtzLCkwtepkNtrshUUFdQBsVv7wJPkT9B0YP6qtsKXJbw/gSNKzIT9d+6gBuA24EbE9qcB94EXkLP/jjBxcgnsRh1bjBJ80ialklUhJcryMljuOnIdwAbyD4HqKGyxUfFb3OAx1B5/wdRF6IuRhXYj8r0foJa/HJh6oA8034j5qdAx4FbUt5dTuOi5HwaMcME6qLkz8BPqMXUK3mn/RDm09Y2U+SMWRnviy5446gpmkQVNW1nLBXgLfQRe4/sTPKQqD/kzzw3pHWmgtpKZNZkF2om1HwbFZIkB7RN56HZAW3VedAd0Hadh4YD2rLzoLZB1xHeCpcGhuBxzIKcjZgHOC21DcpQ9FPSg5ybLOSXHullEY8Ev6d4hCdlfWxjVEiyQuE0xmiB6W1Cq98QKcwlB5RtQNlcckDZBpRNfBdYAbyQUrflIjwT4g54qF7ahg5UYjIvMz7CM2UW8BEq+jO9MtYSEZ4p/wEPNtEZymNmrgAAAABJRU5ErkJggg=="
-
-/***/ }),
-
-/***/ "./src/themes/images/NoAvatarImage.png":
-/*!*********************************************!*\
-  !*** ./src/themes/images/NoAvatarImage.png ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,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"
-
-/***/ }),
-
-/***/ "./src/themes/images/NoImageIcon.png":
-/*!*******************************************!*\
-  !*** ./src/themes/images/NoImageIcon.png ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAg0AAAGlCAIAAAD23VLdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkUxQTQyRkMyRkNCMjExRTM5NTU4OTZEQkJFNzU1OEY1IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkUxQTQyRkMzRkNCMjExRTM5NTU4OTZEQkJFNzU1OEY1Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTFBNDJGQzBGQ0IyMTFFMzk1NTg5NkRCQkU3NTU4RjUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTFBNDJGQzFGQ0IyMTFFMzk1NTg5NkRCQkU3NTU4RjUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7hkGSKAAAPo0lEQVR42uzd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"
 
 /***/ }),
 

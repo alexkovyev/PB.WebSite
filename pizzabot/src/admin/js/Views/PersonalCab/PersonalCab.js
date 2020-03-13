@@ -92,7 +92,7 @@ class PersonalCab extends React.Component {
                     useremail: User.Email,
                     userphone: User.Phone,
                     oldpwd: pwd.oldPwd,
-                    execby: User.FirstName + User.LastName,
+                    execby: User.FirstName + ' ' + User.LastName,
                 },
                 (response) => {
                     if (response && response.isSuccess) {
@@ -263,7 +263,7 @@ class PersonalCab extends React.Component {
                     <div className={'mb-3'}> 
                         {true && 
                             <img 
-                                src={'themes/images/NoAvatarImage.png'} 
+                                src={'/themes/images/NoAvatarImage.png'} 
                                 alt={'No image'}
                             />
                         }
@@ -283,8 +283,8 @@ class PersonalCab extends React.Component {
                             <img 
                                 className={'mt-1 pc_edit_img'}
                                 src={isEditMode 
-                                    ? 'themes/images/AcceptIcon.png'
-                                    : 'themes/images/EditIcon.png'
+                                    ? '/themes/images/AcceptIcon.png'
+                                    : '/themes/images/EditIcon.png'
                                 }
                                 alt={'Key'}
                             />
