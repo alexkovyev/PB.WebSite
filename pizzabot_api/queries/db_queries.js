@@ -31,6 +31,7 @@ const db = pgp(configConnection);
 const users_qq = require('./users/users_queries');
 const operator_qq = require('./operator/operator_queries');
 const general_qq = require('./general/general_queries');
+const cntrls_qq = require('./cntrls/cntrls_queries');
 
 //#endregion
 
@@ -59,6 +60,14 @@ function post_data(actName, params, successFunc, errorFunc) {
 
     if (actName === 'post_add_new_washing') {
         operator_qq.putOperatorActions(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_cntrls_points') {
+        cntrls_qq.cntrlsPoint(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_upd_out_cntrl') {
+        cntrls_qq.cntrlsOutPointUpd(db, params, successFunc, errorFunc);
     }
 }
 

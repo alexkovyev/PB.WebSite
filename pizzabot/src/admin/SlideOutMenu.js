@@ -183,7 +183,7 @@ class SlideOutMenu extends React.Component {
                                             if (e.page) {
                                                 return <Route exact key={i} path={e.page.path} component={e.component} />
                                             }
-                                            return <> </>
+                                            return <React.Fragment key={i}> </React.Fragment>
                                         })}
                                     </div>
                                 </ScrollView>
