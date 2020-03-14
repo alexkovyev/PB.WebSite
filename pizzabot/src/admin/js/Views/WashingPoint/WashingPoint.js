@@ -210,6 +210,10 @@ class WashingPoint extends React.Component {
                             <List 
                                 dataSource={lastActions}
                                 noDataText={'Мойка в кафе не производилась'}
+                                height={'100%'}
+                                focusStateEnabled={false}
+                                hoverStateEnabled={false}
+                                activeStateEnabled={false}
                                 itemRender={(e) => {
                                     return (
                                         <WashingHistoryLine 

@@ -331,6 +331,106 @@ router.post('/general/typecodes', function (req, res) {
 
 //#endregion
 
+
+//#region Cntrls
+
+router.post('/cntrls/upd_out_points', (req, res) => {
+  const cntrlsname = req.body.cntrlsname;
+  const point_id = req.body.point_id;
+  const enabled = req.body.enabled;
+  const execby = req.body.execby;
+
+  successFunc = (data) => {
+    if (data && data[0]['fn_updoutpoints']) {
+      return res.status(200).json({isSuccess: true});
+    } else {
+      return res.status(200).json({
+        Error: {
+          error: true,
+          text: 'Something was wrong',
+        }
+      });
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_upd_out_cntrl',
+    {
+      cntrlsname,
+      point_id,
+      enabled,
+      execby
+    },
+    successFunc,
+    errorFunc
+  );
+})
+
+router.post('/cntrls/get_points', (req, res) => {
+  const cntrlsname = req.body.cntrlsname;
+
+  successFunc = (data) => {
+    if (data) {
+      const cntrlsJson = {};
+      for(var i in data) {
+        const row = data[i];
+        const key = row['ui_name'];
+        const id = row['id'];
+        const enabled = row['enabled'];
+
+        if (!cntrlsJson.hasOwnProperty(key)) {
+          cntrlsJson[key] = [];
+        };
+        cntrlsJson[key].push({id, enabled});
+      }
+
+      const cntrlsArr = [];
+      for(var i in cntrlsJson) {
+        cntrlsArr.push({
+          key: i,
+          items: cntrlsJson[i],
+        });
+      };
+
+      return res.status(200).json({Cntrls: cntrlsArr});
+    } else {
+      return res.status(200).json({
+        Error: {
+          error: true,
+          text: 'Something was wrong',
+        }
+      });
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_cntrls_points',
+    {
+      cntrlsname
+    },
+    successFunc,
+    errorFunc
+  )
+});
+
+//#endregion
+
 if (port === 4000) {
   app.use('/api', router);
   app.listen(port, () => {

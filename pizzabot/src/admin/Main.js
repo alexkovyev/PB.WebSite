@@ -108,7 +108,7 @@ class Main extends Component {
                 {token && context.User && 
                     <SlideOutMenu 
                         menuItems={pages}
-                        defaultPage={'WashPoint'}
+                        defaultPage={'OutPoints'}
                     />
                 }
             </>

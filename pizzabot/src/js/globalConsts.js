@@ -70,4 +70,12 @@ globalConsts.operationTypes = {
 
 //#endregion
 
+//#region Type of cntrls
+
+globalConsts.cntrlsType = {
+    outpoints: 'OutPointCNTRL',
+}
+
+//#endregion
+
 export default globalConsts
