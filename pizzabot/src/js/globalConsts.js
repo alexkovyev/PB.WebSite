@@ -66,6 +66,7 @@ globalConsts.buttons = {
 globalConsts.operationTypes = {
     washing: 'WASHING',
     load_stff: 'LOAD_STFF',
+    sysStatus: 'CHANGE_SYS_STATUS',
 }
 
 //#endregion

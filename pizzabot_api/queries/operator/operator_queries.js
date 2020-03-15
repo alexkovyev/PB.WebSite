@@ -5,7 +5,7 @@ debuggerjs = require('../debugger');
 function operatorActions(dbInstance, params, successFunc, errorFunc) {
     debuggerjs.get_query('FN_LoadOperatorHistory', params);
     dbInstance.any(
-        'SELECT * FROM FN_LoadOperatorHistory(${userrefid}, ${operationtype}, ${datefrom}, ${dateto}, ${is_return_json})',
+        'SELECT * FROM FN_LoadOperatorHistory(${userrefid}, ${operationtype}, ${datefrom}, ${dateto}, ${is_return_json}, ${last_action})',
         params
     )
     .then(data => {
