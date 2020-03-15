@@ -32,6 +32,7 @@ const users_qq = require('./users/users_queries');
 const operator_qq = require('./operator/operator_queries');
 const general_qq = require('./general/general_queries');
 const cntrls_qq = require('./cntrls/cntrls_queries');
+const points_qq = require('./points/points_queries');
 
 //#endregion
 
@@ -68,6 +69,10 @@ function post_data(actName, params, successFunc, errorFunc) {
 
     if (actName === 'post_upd_out_cntrl') {
         cntrls_qq.cntrlsOutPointUpd(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_system_status') {
+        points_qq.systemStatus(db, params, successFunc, errorFunc);
     }
 }
 

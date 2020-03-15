@@ -262,6 +262,7 @@ router.post('/operator/action_history', function (req, res) {
   const operationtype = req.body.operationtype;
   const datefrom = req.body.datefrom;
   const dateto = req.body.dateto;
+  const last_action = req.body.last_action || false;
   const is_return_json = true;
 
   successFunc = (data) => {
@@ -293,6 +294,7 @@ router.post('/operator/action_history', function (req, res) {
       datefrom,
       dateto,
       is_return_json,
+      last_action
     },
     successFunc,
     errorFunc
@@ -428,6 +430,39 @@ router.post('/cntrls/get_points', (req, res) => {
     errorFunc
   )
 });
+
+//#endregion
+
+
+//#region Points
+
+router.post('/point/get_system_status', (req, res) => {
+  const address = req.body.address;
+
+  successFunc = (data) => {
+    if (data && data[0]['fn_getstatusofpoint']) {
+      return res.status(200).json({Status: data[0]['fn_getstatusofpoint']})
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+
+  reqs.post_data(
+    'post_system_status',
+    {
+      address
+    },
+    successFunc, 
+    errorFunc
+  );
+})
 
 //#endregion
 
