@@ -47,6 +47,15 @@ globalConsts.pages = {
         path: '/GenerateDocs', 
         title: 'Отчеты',
     },
+    docForSTFF: {
+        path: '/DocSTFF',
+    },
+    docForSells: {
+        path: '/DocSells',
+    },
+    docForWashing: {
+        path: '/DocWashing',
+    },
     personalCab: {
         path: '/User',
         title: 'Личный кабинет'
@@ -78,5 +87,20 @@ globalConsts.cntrlsType = {
 }
 
 //#endregion
+
+globalConsts.selectDateBox = [
+    {key: 'За последний час', value: 'LH'},
+    {key: 'За сегодня', value: 'TD'}, 
+    {key: 'За вчерашний день', value: 'YD'},
+    {key: 'За текущую неделю', value: 'TW'},
+    {key: 'За текущий месяц', value: 'TM'},
+    {key: 'За текущий квартал', value: 'TQ'}, 
+    {key: 'За текущий год', value: 'TY'}, 
+    {key: 'За последние два дня', value: 'LT'},
+    {key: 'За последний неделю', value: 'LW'}, 
+    {key: 'За последний месяц', value: 'LM'}, 
+    {key: 'За последний квартал', value: 'LQ'},
+    {key: 'За последний год', value: 'LY'},
+]
 
 export default globalConsts

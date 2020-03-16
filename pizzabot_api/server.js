@@ -7,6 +7,10 @@ const jwt = require('jsonwebtoken');
 const morgan = require('morgan');
 const utils = require('./utils');
 const reqs = require('./queries/db_queries');
+const discordBot = require('./bot/bot');
+const { convertArrayToCSV } = require('convert-array-to-csv');
+const converter = require('convert-array-to-csv');
+const fs = require('fs');
  
 const app = express();
 var port = 2093;
@@ -170,6 +174,40 @@ router.post('/users/update', function (req, res) {
   );
 });
  
+router.post('/users/select_by_point', function(req, res) {
+  const point_refid = req.body.point_refid;
+
+  successFunc = (data) => {
+    if (data) {
+      return res.status(200).json({Operators: data})
+    } else {
+      return res.status(200).json({
+        Error: {
+          error: true,
+          text: 'Selecting was wrong',
+        }
+      })
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_operators_by_point',
+    {
+      point_refid
+    },
+    successFunc,
+    errorFunc
+  )
+});
+
 //#endregion
 
 
@@ -465,6 +503,61 @@ router.post('/point/get_system_status', (req, res) => {
 })
 
 //#endregion
+
+
+//#region Docs generation
+
+router.post('/docs/generate/washing', function (req, res) {
+  const datefrom = req.body.dateFrom;
+  const dateto = req.body.dateTo;
+  const type = req.body.type;
+  const userrefid = req.body.userrefid;
+
+
+  successFunc = (data) => {
+    if (data) {
+      const csvFromArrayOfObjects = convertArrayToCSV(data);
+      if (!fs.existsSync('./docs')) {
+        fs.mkdirSync('./docs');
+      }
+      if (!fs.existsSync('./docs/washing')) {
+        fs.mkdirSync('./docs/washing');
+      }
+      fs.writeFileSync(`./docs/washing/from_${datefrom.toLocaleString()}_to_${dateto.toLocaleString()}.csv`, csvFromArrayOfObjects);
+      discordBot.sendDocs(
+        `Документ с отчетом по мойкам c ${(new Date(datefrom)).toLocaleDateString('ru-RU')}, ${(new Date(datefrom)).toLocaleTimeString('ru-RU')} до ${(new Date(dateto)).toLocaleDateString('ru-RU')}, ${(new Date(dateto)).toLocaleTimeString('ru-RU')}`,
+        `./docs/washing/from_${datefrom.toLocaleString()}_to_${dateto.toLocaleString()}.csv`,
+        'dev',
+        true
+      );
+      return res.status(200);
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_generated_doc_for_washing',
+    {
+      userrefid,
+      datefrom,
+      dateto,
+      type,
+    }, 
+    successFunc,
+    errorFunc
+  )
+});
+
+//#endregion
+
+
 
 if (port === 4000) {
   app.use('/api', router);

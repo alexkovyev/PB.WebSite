@@ -27,6 +27,9 @@ import PersonalCab from './js/Views/PersonalCab/PersonalCab';
 import WashingPoint from './js/Views/WashingPoint/WashingPoint';
 import OutPoints from './js/Views/OutPoints/OutPoints';
 import GenerateDocs from './js/Views/GenerateDocs/GenerateDocs';
+import DocForSTFF from './js/Views/GenerateDocs/DocForSTFF';
+import DocForWashing from './js/Views/GenerateDocs/DocForWashing';
+import DocForSells from './js/Views/GenerateDocs/DocForSells';
 
 // Redux store, actions, helpers.
 import { connect, Provider } from 'react-redux';
@@ -72,6 +75,9 @@ class Main extends Component {
             {page: globalConsts.pages.outPoints, component: OutPoints, visible: true, },
             {page: globalConsts.pages.sendDocs, component: GenerateDocs, visible: true, },
             {page: globalConsts.pages.personalCab, component: PersonalCab, visible: true, },
+            {page: globalConsts.pages.docForSTFF, component: DocForSTFF, visible: false, },
+            {page: globalConsts.pages.docForSells, component: DocForSells, visible: false, },
+            {page: globalConsts.pages.docForWashing, component: DocForWashing, visible: false, },
 
             {button: globalConsts.buttons.logout, action: () => {
                 const { 
@@ -108,7 +114,7 @@ class Main extends Component {
                 {token && context.User && 
                     <SlideOutMenu 
                         menuItems={pages}
-                        defaultPage={'ChangeSystemStatus'}
+                        defaultPage={'GenerateDocs'}
                     />
                 }
             </>

@@ -33,6 +33,7 @@ const operator_qq = require('./operator/operator_queries');
 const general_qq = require('./general/general_queries');
 const cntrls_qq = require('./cntrls/cntrls_queries');
 const points_qq = require('./points/points_queries');
+const docs_gen_qq = require('./generate_docs/generation_docs_queries');
 
 //#endregion
 
@@ -73,6 +74,14 @@ function post_data(actName, params, successFunc, errorFunc) {
 
     if (actName === 'post_system_status') {
         points_qq.systemStatus(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_operators_by_point') {
+        operator_qq.getAllOperatorByPoint(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_generated_doc_for_washing') {
+        docs_gen_qq.docsForWashing(db, params, successFunc, errorFunc);
     }
 }
 

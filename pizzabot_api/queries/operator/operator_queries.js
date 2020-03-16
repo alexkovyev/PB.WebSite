@@ -32,7 +32,26 @@ function putOperatorActions(dbInstance, params, successFunc, errorFunc) {
 
 //#endregion
 
+//#region Select all
+
+function getAllOperatorByPoint(dbInstance, params, successFunc, errorFunc) {
+    debuggerjs.get_query('FN_Users_S', params);
+    dbInstance.any(
+        'SELECT * FROM FN_Users_S(${point_refid})',
+        params
+    )
+    .then(data => {
+        successFunc(data);
+    })
+    .catch(err => {
+        errorFunc(err);
+    });
+}
+
+//#endregion
+
 module.exports = {
     operatorActions,
-    putOperatorActions
+    putOperatorActions,
+    getAllOperatorByPoint
 }
