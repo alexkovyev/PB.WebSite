@@ -30,6 +30,11 @@ class SignInAdmin extends React.Component {
         this.handleLoginChanged = this.handleLoginChanged.bind(this);
         this.handlePasswordChanged = this.handlePasswordChanged.bind(this);
         this.handleSignInClick = this.handleSignInClick.bind(this);
+        this.handleFocusOnConrol = this.handleFocusOnConrol.bind(this);
+    }
+
+    handleFocusOnConrol(args) {
+        console.log(args);
     }
 
     handleLoginChanged(args) {
@@ -120,6 +125,7 @@ class SignInAdmin extends React.Component {
                                 isValid={!showErrorMsg}
                                 onValueChanged={this.handleLoginChanged}
                                 onEnterKey={this.handleSignInClick}
+                                onFocusIn={this.handleFocusOnConrol}
                             />
                         </div>
                         <div className={'form-group text-left mb-4'}>

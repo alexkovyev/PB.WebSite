@@ -11,6 +11,7 @@ const discordBot = require('./bot/bot');
 const { convertArrayToCSV } = require('convert-array-to-csv');
 const converter = require('convert-array-to-csv');
 const fs = require('fs');
+//const pc = require('./pc/pc');
  
 const app = express();
 var port = 2093;
@@ -57,6 +58,17 @@ router.get('/', (req, res) => {
   if (!req.context) return res.status(401).json({ Error: {success: false, text: 'Invalid user to access it.', }});
 });
 
+//#region PC's qq
+router.post('/pc/send_query', (req, res) => {
+  const methodName = req.body.methodName;
+  const JSONdata = req.body.jsondata;
+
+  pc.sendRequest(JSON.stringify({
+    cmdName: methodName,
+    params: JSONdata,
+  }));
+});
+
  
 //#region Users qq
 
@@ -79,7 +91,11 @@ router.post('/users/signin', function (req, res) {
           RoleName: userData.rolename,
           Email: userData.useremail,
           Phone: userData.userphone,
-        }
+          Profile: {
+            RefID: userData.userprofilerefid,
+          }
+        },
+        Pages: userData.pages,
       };
 
       contexts[context.User.RefID] = context;
@@ -128,13 +144,17 @@ router.post('/users/update', function (req, res) {
   successFunc = (data) => {
     if (data && data.length === 1 && data[0]['fn_users_iu']) {
       contexts[data[0]['fn_users_iu']] = {
-        RefID: refid,
-        FirstName: userfn,
-        SecondName: usersn,
-        LastName: userln,
-        Email: useremail,
-        Phone: userphone,
-        RoleName: contexts[data[0]['fn_users_iu']].RoleName
+        User: {
+          RefID: refid,
+          FirstName: userfn,
+          SecondName: usersn,
+          LastName: userln,
+          Email: useremail,
+          Phone: userphone,
+          RoleName: contexts[data[0]['fn_users_iu']].User.RoleName,
+          Profile: contexts[data[0]['fn_users_iu']].User.Profile,
+        },
+        Pages: contexts[data[0]['fn_users_iu']].Pages
       };
       return res.status(200).json({isSuccess: true});
     } else {
@@ -217,6 +237,8 @@ router.post('/users/select_by_point', function(req, res) {
 router.get('/verifyToken', function (req, res) {
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token;
+  var pageName = req.body.pageName || req.query.pageName;
+
   if (!token) {
     return res.status(400).json({
       Error: {
@@ -245,7 +267,17 @@ router.get('/verifyToken', function (req, res) {
     }
 
     // get basic context details
-    var contextObj = utils.getCleanContext(contexts[context.User.RefID]);
+    contextObj = utils.getCleanContext(contexts[context.User.RefID]);
+
+    if (contextObj.Pages.indexOf(pageName) < 0) {
+      delete contexts[context.User.RefID];
+      return res.status(401).json({
+        Error: {
+          error: true,
+          text: 'Invalid page.'
+        }
+      });
+    }
     return res.status(200).json({ context: contextObj, token });
   });
 });
@@ -255,7 +287,7 @@ router.get('/verifyToken', function (req, res) {
 
 //#region Operator qq
 
-router.post('/operator/add_washing_history', function(req, res) {
+router.post('/operator/add_history', function(req, res) {
   const userrefid = req.body.userrefid;
   const actiontype = req.body.actiontype;
   const actioncontent = req.body.actioncontent;
@@ -283,7 +315,7 @@ router.post('/operator/add_washing_history', function(req, res) {
   };
 
   reqs.post_data(
-    'post_add_new_washing',
+    'post_add_new_action',
     {
       userrefid,
       actiontype,
@@ -374,11 +406,12 @@ router.post('/general/typecodes', function (req, res) {
 
 //#region Cntrls
 
-router.post('/cntrls/upd_out_points', (req, res) => {
+router.post('/cntrls/upd_points', (req, res) => {
   const cntrlsname = req.body.cntrlsname;
   const point_id = req.body.point_id;
   const enabled = req.body.enabled;
   const execby = req.body.execby;
+  const userprofilerefid = req.body.userprofilerefid;
 
   successFunc = (data) => {
     if (data && data[0]['fn_updoutpoints']) {
@@ -402,12 +435,13 @@ router.post('/cntrls/upd_out_points', (req, res) => {
   };
 
   reqs.post_data(
-    'post_upd_out_cntrl',
+    'post_upd_cntrl',
     {
       cntrlsname,
       point_id,
       enabled,
-      execby
+      execby,
+      userprofilerefid,
     },
     successFunc,
     errorFunc
@@ -416,6 +450,7 @@ router.post('/cntrls/upd_out_points', (req, res) => {
 
 router.post('/cntrls/get_points', (req, res) => {
   const cntrlsname = req.body.cntrlsname;
+  const userprofilerefid = req.body.userprofilerefid;
 
   successFunc = (data) => {
     if (data) {
@@ -462,7 +497,8 @@ router.post('/cntrls/get_points', (req, res) => {
   reqs.post_data(
     'post_cntrls_points',
     {
-      cntrlsname
+      cntrlsname,
+      userprofilerefid,
     },
     successFunc,
     errorFunc
@@ -476,6 +512,7 @@ router.post('/cntrls/get_points', (req, res) => {
 
 router.post('/point/get_system_status', (req, res) => {
   const address = req.body.address;
+  const userprofilerefid = req.body.userprofilerefid;
 
   successFunc = (data) => {
     if (data && data[0]['fn_getstatusofpoint']) {
@@ -495,11 +532,74 @@ router.post('/point/get_system_status', (req, res) => {
   reqs.post_data(
     'post_system_status',
     {
-      address
+      address,
+      userprofilerefid
     },
     successFunc, 
     errorFunc
   );
+})
+
+router.post('/point/get_orders_status', (req, res) => {
+  const point_refid = req.body.point_refid;
+
+  successFunc = (data) => {
+    if (data && data.length === 1) {
+      return res.status(200).json({
+        OrdersNow: data[0]['numberofordersnow'],
+        OrdersToday: data[0]['numberoforderstoday'] 
+      })
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_orders_in_today',
+    {
+      point_refid
+    },
+    successFunc,
+    errorFunc
+  )
+})
+
+router.post('/point/get_system_statistics', (req, res) => {
+  const point_refid = req.body.point_refid;
+
+  successFunc = (data) => {
+    if (data && data.length === 1) {
+      return res.status(200).json({
+        OrdersNow: data[0]['numberofordersnow'],
+        OrdersToday: data[0]['numberoforderstoday'],
+        CountOfUnavailableDishes: data[0]['numberofunavailabledishes'],
+        CountOfErrors: data[0]['numberoferrors']
+      })
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_point_statistics',
+    {
+      point_refid,
+    },
+    successFunc, 
+    errorFunc
+  )
 })
 
 //#endregion
@@ -558,6 +658,172 @@ router.post('/docs/generate/washing', function (req, res) {
 //#endregion
 
 
+//#region STFFS
+
+router.post('/stffs/update_balance', (req, res) => {
+  const point_refid = req.body.point_refid;
+  const operatorfi = req.body.operatorfi;
+  const load_stff = req.body.loadSTFF;
+  const unload_stff = req.body.unloadSTFF;
+
+  var repeatable_qq = Object.keys(load_stff).length + Object.keys(unload_stff).length;
+  successFunc = (data) => {
+    if (data && (data[0]['fn_unloadstff'] || data[0]['fn_loadstff'])) {
+      repeatable_qq -= 1;
+      if (repeatable_qq === 0) {
+        return res.status(200).json({isSuccess: true});
+      }
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  for(var i in unload_stff) {
+    reqs.post_data(
+      'post_unload_container', 
+      {
+        operatorfi,
+        container_refid: unload_stff[i],
+      },
+      successFunc,
+      errorFunc
+    );
+  }
+  for(i in load_stff) {
+    for(var j in load_stff[i]) {
+      reqs.post_data(
+        'post_load_container',
+        {
+          operatorfi,
+          container_codename: i,
+          cell_codename: j,
+          stff_refid: load_stff[i][j]
+        },
+        successFunc,
+        errorFunc
+      )
+    }
+  }
+});
+
+router.post('/stffs/get_all_stff', (req, res) => {
+  const point_refid = req.body.point_refid;
+
+  successFunc = (data) => {
+    if (data) {
+      return res.status(200).json({StffsByNames: data});
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_all_stffs',
+    {
+      point_refid
+    },
+    successFunc,
+    errorFunc
+  )
+})
+
+router.post('/stffs/get_count_of_stffs', (req, res) => {
+  const point_refid = req.body.point_refid;
+
+  successFunc = (data) => {
+    if (data) {
+      return res.status(200).json({STFFCount: data});
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_stffs_count', 
+    {
+      point_refid
+    },
+    successFunc,
+    errorFunc
+  )
+})
+
+router.post('/stffs/get_fridge_map', (req, res) => {
+  const point_refid = req.body.point_refid;
+
+  successFunc = (data) => {
+    if (data) {
+      const fridgeMapJson = {};
+      for(var i in data) {
+        var row = data[i];
+        var codename = row['codename'];
+        var refid = row['refid'];
+        var key = codename[0];
+
+        if (!fridgeMapJson.hasOwnProperty(key)) {
+          fridgeMapJson[key] = [];
+        }
+        fridgeMapJson[key].push({codename, refid});
+      }
+
+      const fridgeMapArr = [];
+      for(var i in fridgeMapJson) {
+        fridgeMapArr.push({
+          key: i,
+          items: fridgeMapJson[i]
+        });
+      }
+
+      return res.status(200).json({
+        FridgeMap: fridgeMapArr,
+      })
+    } else {
+      return res.status(200).json({
+        Error: {
+          error: true,
+          text: 'Something was wrong',
+        }
+      });
+    }
+  };
+  errorFunc = (data) => {
+    return res.status(200).json({
+      Error: {
+        error: true,
+        text: 'Connection is lost'
+      }
+    })
+  };
+
+  reqs.post_data(
+    'post_fridge_map',
+    {
+      point_refid
+    },
+    successFunc,
+    errorFunc
+  )
+})
+
+//#endregion
 
 if (port === 4000) {
   app.use('/api', router);

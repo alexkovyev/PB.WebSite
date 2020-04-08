@@ -30,11 +30,15 @@ bot.on('ready', () => {
 });
 
 bot.on('message', msg => {
-  if (msg.content === 'ping') {
+  if (msg.content.toLocaleLowerCase() === 'ping') {
     msg.reply('Pong!');
   }
+
+  if (msg.content.toLocaleLowerCase() === 'beep') {
+    msg.reply('Boop!');
+  }
   
-  if (msg.content.toLocaleLowerCase().indexOf('Привет') < 0 && 
+  if (msg.content.toLocaleLowerCase().indexOf('привет') >= 0 && 
       msg.author.id !== bot.user.id) {
         var replyMsg = 'И тебе привет, мой дорогой друг!';
         if (msg.author.id === '589497992566800384') {

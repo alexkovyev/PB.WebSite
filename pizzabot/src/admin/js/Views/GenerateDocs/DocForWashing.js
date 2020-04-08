@@ -143,7 +143,7 @@ class DocForWashing extends React.Component {
             },
             (response) => {
                 dispatch(changeVisibilityOfLoadingPanel(false));
-                notify("Something in generation was wrong", "error", 500);
+                notify("Что-то с генерацией документа пошло не так", "error", 1000);
             }
         )
     }

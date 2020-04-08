@@ -122,32 +122,45 @@ class SlideOutMenu extends React.Component {
         }
     }
 
-    renderListItem = (e) => {
+    getAvailablePageIndexFromPath(path) {
+        var locationHash = path.replace('/', '')
+        locationHash = locationHash.charAt(0).toLowerCase() + locationHash.substring(1);
+
+        return locationHash;
+    }
+
+    renderListItem = (e, availablePages) => {
+        if (e.page) {
+            var locationHash = this.getAvailablePageIndexFromPath(e.page.path);
+        }
+
         return (
-            <div>
-                {e.page && 
-                    <div 
-                        onClick={() => { this.menuItemClick(e); }} 
-                        className={"pb_slideout_menu_item dx-navigation-item " + (window.location.hash.indexOf(e.page.path) !== -1 ? 'font-weight-bold' : '')}
-                    >
-                        {e.page.title}
-                    </div>
-                }
-                {e.button &&
-                    <div
-                        onClick={() => { e.action(); }}
-                        className={"pb_slideout_menu_item dx-navigation-item"}
-                    > 
-                        {e.button.title}
-                    </div>
-                }
-            </div>
+            <>
+                <div>
+                    {e.page && availablePages.indexOf(locationHash) >= 0 && 
+                        <div 
+                            onClick={() => { this.menuItemClick(e); }} 
+                            className={"pb_slideout_menu_item dx-navigation-item " + (window.location.hash.indexOf(e.page.path.replace('/', '')) !== -1 ? 'font-weight-bold' : '')}
+                        >
+                            {e.page.title}
+                        </div>
+                    }
+                    {e.button &&
+                        <div
+                            onClick={() => { e.action(); }}
+                            className={"pb_slideout_menu_item dx-navigation-item"}
+                        > 
+                            {e.button.title}
+                        </div>
+                    }
+                </div>
+            </>
         );
     }
 
     render() {
         return (
-            <HashRouter ref={x => this.hashRouter = x}>
+            <HashRouter ref={x => this.hashRouter = x} hashType={'noslash'}>
                 {this.props.defaultPage && 
                     <Redirect exact from="/" to={'/' + this.props.defaultPage} />
                 }
@@ -164,8 +177,21 @@ class SlideOutMenu extends React.Component {
                     >
                         <Template name="menu">
                             <List
-                                dataSource={this.props.menuItems.filter(item => item.visible)}
-                                itemRender={this.renderListItem}
+                                dataSource={
+                                    this.props.menuItems.filter(
+                                        item => 
+                                            item.visible && 
+                                            (
+                                                (
+                                                    item.page && 
+                                                    this.props.availablePages && 
+                                                    this.props.availablePages.indexOf(this.getAvailablePageIndexFromPath(item.page.path)) >= 0
+                                                ) ||
+                                                item.button
+                                            )
+                                    )
+                                }
+                                itemRender={(e) => this.renderListItem(e, this.props.availablePages)}
                                 width="350px"
                             />
                         </Template>
@@ -181,8 +207,13 @@ class SlideOutMenu extends React.Component {
                                     <div className="pb_main_content_holder">
                                         {this.props.menuItems.map((e, i) => {
                                             if (e.page) {
+                                                var locationHash = this.getAvailablePageIndexFromPath(e.page.path);
+                                            }
+
+                                            if (this.props.availablePages && this.props.availablePages.indexOf(locationHash) >= 0) {
                                                 return <Route exact key={i} path={e.page.path} component={e.component} />
                                             }
+
                                             return <React.Fragment key={i}> </React.Fragment>
                                         })}
                                     </div>
@@ -199,6 +230,7 @@ class SlideOutMenu extends React.Component {
 SlideOutMenu.propTypes = {
     defaultPage: PropTypes.string,
     menuItems: PropTypes.array.isRequired,
+    availablePages: PropTypes.array.isRequired,
 }
 
 export default SlideOutMenu;
