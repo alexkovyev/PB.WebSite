@@ -33,7 +33,8 @@ class OutPoints extends React.Component {
 
     loadData() {
         const {
-            dispatch
+            dispatch,
+            context
         } = this.props;
 
         dispatch(changeVisibilityOfLoadingPanel(true));
@@ -42,6 +43,7 @@ class OutPoints extends React.Component {
             '/cntrls/get_points',
             {
                 cntrlsname: globalConsts.cntrlsType.outpoints,
+                userprofilerefid: context.User.Profile.RefID,
             },
             (response) => {
                 if (response && response.Cntrls) {
@@ -67,12 +69,13 @@ class OutPoints extends React.Component {
         dispatch(changeVisibilityOfLoadingPanel(true));
         globalFuncs.sendRequest(
             'POST',
-            '/cntrls/upd_out_points',
+            '/cntrls/upd_points',
             {
-                cntrlsname: 'OutPointCNTRL',
+                cntrlsname: globalConsts.cntrlsType.outpoints,
                 point_id: itemData.id,
                 enabled: !itemData.enabled,
                 execby: context.User.FirstName + ' ' + context.User.SecondName,
+                userprofilerefid: context.User.Profile.RefID,
             },
             (response) => {
                 if (response && response.isSuccess) {
@@ -138,7 +141,6 @@ class OutPoints extends React.Component {
                             activeStateEnabled={false}
                             onItemClick={this.handleChangeEnabledOfOutPoint}
                             groupRender={(args) => {
-                                console.log(args);
                                 return (
                                     <div style={{fontSize: '17px'}}>{args.key}</div>
                                 )

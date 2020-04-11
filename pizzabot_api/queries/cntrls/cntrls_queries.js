@@ -5,7 +5,7 @@ debuggerjs = require('../debugger');
 function cntrlsPoint(dbInstance, params, successFunc, errorFunc) {
     debuggerjs.get_query('FN_GetPoints', params);
     dbInstance.any(
-        'SELECT * FROM FN_GetPoints(${cntrlsname})',
+        'SELECT * FROM FN_GetPoints(${cntrlsname}, ${userprofilerefid})',
         params
     )
     .then(data => {
@@ -20,10 +20,10 @@ function cntrlsPoint(dbInstance, params, successFunc, errorFunc) {
 
 //#region Cntrl upd
 
-function cntrlsOutPointUpd(dbInstance, params, successFunc, errorFunc) {
-    debuggerjs.get_query('FN_UpdOutPoints', params);
+function cntrlsPointUpd(dbInstance, params, successFunc, errorFunc) {
+    debuggerjs.get_query('FN_UpdPoints', params);
     dbInstance.any(
-        'SELECT * FROM FN_UpdOutPoints(${cntrlsname}, ${point_id}, ${enabled}, ${execby})',
+        'SELECT * FROM FN_UpdPoints(${cntrlsname}, ${point_id}, ${enabled}, ${execby}, ${userprofilerefid})',
         params
     )
     .then(data => {
@@ -38,5 +38,5 @@ function cntrlsOutPointUpd(dbInstance, params, successFunc, errorFunc) {
 
 module.exports = {
     cntrlsPoint,
-    cntrlsOutPointUpd,
+    cntrlsPointUpd,
 }

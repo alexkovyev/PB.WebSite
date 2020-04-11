@@ -8,7 +8,8 @@ function generateToken(context) {
   if (!context) return null;
 
   const {
-    User
+    User,
+    Pages,
   } = context;
 
   var context = {
@@ -20,7 +21,9 @@ function generateToken(context) {
       RoleName: User.RoleName,
       Email: User.Email,
       Phone: User.Phone,
+      Profile: User.Profile,
     },
+    Pages,
   };
 
   return token = jwt.sign(context, process.env.JWT_SECRET, {
@@ -33,7 +36,8 @@ function getCleanContext(context) {
   if (!context) return null;
 
   const {
-    User
+    User,
+    Pages,
   } = context;
 
   return {
@@ -45,7 +49,9 @@ function getCleanContext(context) {
       RoleName: User.RoleName,
       Email: User.Email,
       Phone: User.Phone,
+      Profile: User.Profile,
     },
+    Pages,
   };
 }
 

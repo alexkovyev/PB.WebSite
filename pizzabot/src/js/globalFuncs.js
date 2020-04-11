@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 var globalFuncs = {};
 
@@ -181,5 +182,142 @@ globalFuncs.mapStateToProps_global = function(state) {
 }
 
 //#endregion
+
+globalFuncs.CalcStartDate = (period) => {
+    var res;
+
+    switch (period) {
+        case 'LH': { //Last hour
+            res = moment().add(-1, 'hours');
+            break;
+        }
+        case 'TD': { //Today
+            res = moment().set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'YD': { //Yesterday
+            res = moment().add(-1, 'days').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'TW': { //This week
+            res = moment().startOf('isoWeek').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'TM': { //This month
+            res = moment().startOf('month').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'TQ': { //This quarter
+            res = moment().startOf('quarter').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'TY': { //This year
+            res = moment().startOf('year').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'LT': { //Last 2 days
+            res = moment().add(-1, 'days').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'LS': { //Last 7 days
+            res = moment().add(-6, 'days').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'LW': { //Last week
+            res = moment().startOf('isoWeek').add(-7, 'days').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'LD': { //Last 30 days
+            res = moment().add(-30, 'days').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'LM': { //Last month
+            res = moment().startOf('month').add(-1, 'month').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'LQ': { //Last quarter
+            res = moment().startOf('quarter').add(-1, 'quarter').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        case 'LY': { //Last year
+            res = moment().startOf('year').add(-1, 'year').set({ 'hours': 0, 'minute': 0, 'second': 0 });
+            break;
+        }
+        default: {
+            res = null;
+            break;
+        }
+    }
+
+    return res;
+}
+globalFuncs.CalcEndDate = (period) => {
+    var res;
+
+    switch (period) {
+        case 'LH': { //Last hour
+            res = moment();
+            break;
+        }
+        case 'TD': { //Today
+            res = moment().set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'YD': { //Yesterday
+            res = moment().add(-1, 'days').set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'TW': { //This week
+            res = moment().endOf('isoWeek').set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'TM': { //This month
+            res = moment().endOf('month').set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'TQ': { //This quarter
+            res = moment().endOf('quarter').set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'TY': { //This year
+            res = moment().endOf('year').set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'LT': { //Last 2 days
+            res = moment().set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'LS': { //Last 7 days
+            res = moment().set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'LW': { //Last week
+            res = moment().endOf('isoWeek').add(-7, 'days').set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'LD': { //Last 30 days
+            res = moment().set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'LM': { //Last month
+            res = moment().endOf('month').add(-1, 'month').set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'LQ': { //Last quarter
+            res = moment().endOf('quarter').add(-1, 'quarter').set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        case 'LY': { //Last year
+            res = moment().endOf('year').add(-1, 'year').set({ 'hours': 23, 'minute': 59, 'second': 59 });
+            break;
+        }
+        default: {
+            res = null;
+            break;
+        }
+    }
+
+    return res;
+}
 
 export default globalFuncs

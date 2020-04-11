@@ -134,7 +134,7 @@ class WashingPoint extends React.Component {
         dispatch(changeVisibilityOfLoadingPanel(true));
         globalFuncs.sendRequest(
             'POST',
-            '/operator/add_washing_history',
+            '/operator/add_history',
             {
                 userrefid: User.RefID,
                 actiontype: globalConsts.operationTypes.washing,

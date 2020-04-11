@@ -146,6 +146,7 @@ export function initContext(data) {
         return {
             type: INIT_CONTEXT,
             User: data.context.User,
+            Pages: data.context.Pages,
         } 
     } else {
         return {

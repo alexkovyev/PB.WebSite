@@ -33,7 +33,8 @@ class ChangeSystemStatus extends React.Component {
 
     loadData() {
         const {
-            dispatch
+            dispatch,
+            context,
         } = this.props;
 
         dispatch(changeVisibilityOfLoadingPanel(true));
@@ -42,6 +43,7 @@ class ChangeSystemStatus extends React.Component {
             '/point/get_system_status',
             {
                 address: 'Плеханова 58а',
+                userprofilerefid: context.User.Profile.RefID,
             },
             (response) => {
                 if (response && response.Status) {
@@ -79,7 +81,45 @@ class ChangeSystemStatus extends React.Component {
     }
 
     handleChangeStatusOfTheSystem() {
+        const {
+            dispatch
+        } = this.props;
 
+        const {
+            mode
+        } = this.state;
+
+        var jsondata = 'OFF'
+        switch(mode) {
+            case 'ON':
+            case 'ON AFTER CRITICAL ERROR':
+                jsondata = 'OFF'
+                break;
+            case 'OFF':
+                jsondata = 'ON'
+                break;
+            case 'OFF AFTER CRITICAL ERROR':
+                jsondata = 'ON AFTER CRITICAL ERROR'
+                break;
+            default: 
+                break;
+        }
+
+        dispatch(changeVisibilityOfLoadingPanel(true));
+        /*globalFuncs.sendRequest(
+            'POST',
+            '/pc/send_query', 
+            {
+                methodName: 'turn_off',
+                jsondata: jsondata
+            },
+            (response) => {
+                dispatch(changeVisibilityOfLoadingPanel(false));
+            },
+            (response) => {
+                dispatch(changeVisibilityOfLoadingPanel(false));
+            }
+        )*/
     }
 
     render() {
@@ -98,10 +138,17 @@ class ChangeSystemStatus extends React.Component {
                 <div className={'css_div'}>
                     <div className={'text-center mt-1 mb-4'}> 
                         <h3 className={'mb-3'}>Включение системы</h3>
-                        <h5 className={'text-muted text-justify pl-2 pr-2'}>
-                            Внимание! Перед запуском системы сделайте то, и это, и, разумеется еще и это. 
-                            Внимание! Перед запуском системы сделайте то, и это, и, разумеется еще и это.
-                        </h5>
+                        {mode !== 'LATER' &&
+                            <h5 className={'text-muted text-justify pl-2 pr-2'}>
+                                Внимание! Перед запуском системы сделайте то, и это, и, разумеется еще и это. 
+                                Внимание! Перед запуском системы сделайте то, и это, и, разумеется еще и это.
+                            </h5>
+                        }
+                        {mode === 'LATER' &&
+                            <div className={'text-justify pl-2 pr-2'}> 
+                                <h5>Система была выключена аварийно. Позовите администратора, чтобы включить ее.</h5>
+                            </div>
+                        }
                         {(mode === 'ON' || mode === 'ON AFTER CRITICAL ERROR') && 
                             <div className={'css_strt_bttn text-center'}>
                                 <Button 

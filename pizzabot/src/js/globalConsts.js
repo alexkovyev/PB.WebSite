@@ -16,22 +16,23 @@ globalConsts.pageTarget = {
 globalConsts.pages = {
     home: {
         path: '/Home',
-        title: 'Home'
     },
     signIn: {
         path: '/SignIn',
-        title: 'SignIn',
     },
 
-    mainPage: {
+    main: {
         path: '/Main',
         title: 'Главная страница',
     },
-    loadProducts: {
-        path: '/LoadProducts',
+    productsMovements: {
+        path: '/ProductsMovements',
         title: 'Работа с запасами',
     },
-    startCleanning: {
+    loadProducts: {
+        path: '/LoadProducts',
+    },
+    washPoint: {
         path: '/WashPoint',
         title: 'Запуск мойки',
     }, 
@@ -43,11 +44,52 @@ globalConsts.pages = {
         path: '/OutPoints',
         title: 'Окно выдачи',
     },
-    sendDocs: {
+    generateDocs: {
         path: '/GenerateDocs', 
         title: 'Отчеты',
     },
-    personalCab: {
+    docSTFF: {
+        path: '/DocSTFF',
+    },
+    docSells: {
+        path: '/DocSells',
+    },
+    docWashing: {
+        path: '/DocWashing',
+    },
+    menuCategories: {
+        path: '/MenuCategories',
+        title: 'Работа с категориями',
+    },
+    iUCategory: {
+        path: '/IUCategory',
+    },
+    menuDishes: {
+        path: '/MenuDishes',
+        title: 'Работа с меню',
+    },
+    iUDish: {
+        path: '/IUDish',
+    },
+    ovenPoints: {
+        path: '/OvenPoints',
+        title: 'Печи',
+    },
+    operators: {
+        path: '/Operators',
+        title: 'Управление пользователями',
+    },
+    iOperator: {
+        path: '/IOperator',
+    },
+    adBlocks: {
+        path: '/AdBlocks',
+        title: 'Рекламные блоки',
+    },
+    iUAdBlocks: {
+        path: '/IUAdBlocks',
+    },
+    user: {
         path: '/User',
         title: 'Личный кабинет'
     },
@@ -65,7 +107,7 @@ globalConsts.buttons = {
 
 globalConsts.operationTypes = {
     washing: 'WASHING',
-    load_stff: 'LOAD_STFF',
+    load_stff: 'MVMNT_STFF',
     sysStatus: 'CHANGE_SYS_STATUS',
 }
 
@@ -75,8 +117,24 @@ globalConsts.operationTypes = {
 
 globalConsts.cntrlsType = {
     outpoints: 'OutPointCNTRL',
+    ovenpoints: 'OvenPointCNTRL',
 }
 
 //#endregion
+
+globalConsts.selectDateBox = [
+    {key: 'За последний час', value: 'LH'},
+    {key: 'За сегодня', value: 'TD'}, 
+    {key: 'За вчерашний день', value: 'YD'},
+    {key: 'За текущую неделю', value: 'TW'},
+    {key: 'За текущий месяц', value: 'TM'},
+    {key: 'За текущий квартал', value: 'TQ'}, 
+    {key: 'За текущий год', value: 'TY'}, 
+    {key: 'За последние два дня', value: 'LT'},
+    {key: 'За последний неделю', value: 'LW'}, 
+    {key: 'За последний месяц', value: 'LM'}, 
+    {key: 'За последний квартал', value: 'LQ'},
+    {key: 'За последний год', value: 'LY'},
+]
 
 export default globalConsts

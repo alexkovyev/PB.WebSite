@@ -33,6 +33,8 @@ const operator_qq = require('./operator/operator_queries');
 const general_qq = require('./general/general_queries');
 const cntrls_qq = require('./cntrls/cntrls_queries');
 const points_qq = require('./points/points_queries');
+const docs_gen_qq = require('./generate_docs/generation_docs_queries');
+const stff_qq = require('./stffs/stffs_queries');
 
 //#endregion
 
@@ -59,7 +61,7 @@ function post_data(actName, params, successFunc, errorFunc) {
         general_qq.typeCodes(db, params, successFunc, errorFunc);
     }
 
-    if (actName === 'post_add_new_washing') {
+    if (actName === 'post_add_new_action') {
         operator_qq.putOperatorActions(db, params, successFunc, errorFunc);
     }
 
@@ -67,12 +69,48 @@ function post_data(actName, params, successFunc, errorFunc) {
         cntrls_qq.cntrlsPoint(db, params, successFunc, errorFunc);
     }
 
-    if (actName === 'post_upd_out_cntrl') {
-        cntrls_qq.cntrlsOutPointUpd(db, params, successFunc, errorFunc);
+    if (actName === 'post_upd_cntrl') {
+        cntrls_qq.cntrlsPointUpd(db, params, successFunc, errorFunc);
     }
 
     if (actName === 'post_system_status') {
         points_qq.systemStatus(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_operators_by_point') {
+        operator_qq.getAllOperatorByPoint(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_generated_doc_for_washing') {
+        docs_gen_qq.docsForWashing(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_orders_in_today') {
+        points_qq.allOrdersOfPoint(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_point_statistics') {
+        points_qq.systemStatistics(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_stffs_count') {
+        stff_qq.stffsWithCount(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_fridge_map') {
+        stff_qq.fridgeMap(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_all_stffs') {
+        stff_qq.stffsWithNames(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_load_container') {
+        stff_qq.loadStff(db, params, successFunc, errorFunc);
+    }
+
+    if (actName === 'post_unload_container') {
+        stff_qq.unloadStff(db, params, successFunc, errorFunc);
     }
 }
 

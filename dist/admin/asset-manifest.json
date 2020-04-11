@@ -1,14 +1,16 @@
 {
   "files": {
-    "static/js/0.chunk.js": "/React/dist/admin/static/js/0.chunk.js",
-    "static/js/0.chunk.js.map": "/React/dist/admin/static/js/0.chunk.js.map",
-    "main.js": "/React/dist/admin/static/js/main.chunk.js",
-    "main.js.map": "/React/dist/admin/static/js/main.chunk.js.map",
-    "runtime~main.js": "/React/dist/admin/static/js/bundle.js",
-    "runtime~main.js.map": "/React/dist/admin/static/js/bundle.js.map",
+    "main.css": "/React/dist/admin/static/css/main.d611ced2.chunk.css",
+    "main.js": "/React/dist/admin/static/js/main.549448b0.chunk.js",
+    "main.js.map": "/React/dist/admin/static/js/main.549448b0.chunk.js.map",
+    "runtime~main.js": "/React/dist/admin/static/js/runtime~main.762bbb33.js",
+    "runtime~main.js.map": "/React/dist/admin/static/js/runtime~main.762bbb33.js.map",
+    "static/css/2.1f6c9eb8.chunk.css": "/React/dist/admin/static/css/2.1f6c9eb8.chunk.css",
+    "static/js/2.a24bf2ae.chunk.js": "/React/dist/admin/static/js/2.a24bf2ae.chunk.js",
+    "static/js/2.a24bf2ae.chunk.js.map": "/React/dist/admin/static/js/2.a24bf2ae.chunk.js.map",
     "index.html": "/React/dist/admin/index.html",
-    "static/media/dxicons.woff2": "/React/dist/admin/static/media/dxicons.1286a19f.woff2",
-    "static/media/dxicons.ttf": "/React/dist/admin/static/media/dxicons.147eb6fe.ttf",
-    "static/media/dxicons.woff": "/React/dist/admin/static/media/dxicons.2b145cef.woff"
+    "static/css/2.1f6c9eb8.chunk.css.map": "/React/dist/admin/static/css/2.1f6c9eb8.chunk.css.map",
+    "static/css/main.d611ced2.chunk.css.map": "/React/dist/admin/static/css/main.d611ced2.chunk.css.map",
+    "static/media/dx.light.css": "/React/dist/admin/static/media/dxicons.2b145cef.woff"
   }
 }
