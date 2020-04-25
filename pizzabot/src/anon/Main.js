@@ -22,23 +22,7 @@ import HomePage from './js/Views/HomePage/HomePage'
 import SignInAdmin from './js/Views/SignInAdmin/SignInAdmin';
 
 import MainInfoPage from './js/Views/MainInfoPage/MainInfoPage';
-import ChangeSystemStatus from './js/Views/ChangeSystemStatus/ChangeSystemStatus';
 import PersonalCab from './js/Views/PersonalCab/PersonalCab';
-import WashingPoint from './js/Views/WashingPoint/WashingPoint';
-import OutPoints from './js/Views/OutPoints/OutPoints';
-import PointSTFF from './js/Views/PointSTFF/PointSTFF';
-import LoadSTFF from './js/Views/PointSTFF/LoadSTFF';
-import GenerateDocs from './js/Views/GenerateDocs/GenerateDocs';
-import DocForSTFF from './js/Views/GenerateDocs/DocForSTFF';
-import DocForWashing from './js/Views/GenerateDocs/DocForWashing';
-import DocForSells from './js/Views/GenerateDocs/DocForSells';
-import MenuCategories from './js/Views/MenuCategories/MenuCategories';
-import IUCategory from './js/Views/MenuCategories/IUCategory';
-import MenuDishes from './js/Views/MenuDishes/MenuDishes';
-import IUDish from './js/Views/MenuDishes/IUDish';
-import OvenPoints from './js/Views/OvenPoints/OvenPoints';
-import Operators from './js/Views/Operators/Operators';
-import IOperator from './js/Views/Operators/IOperator';
 import AdBlocks from './js/Views/AdBlocks/AdBlocks';
 import IUAdBlock from './js/Views/AdBlocks/IUAdBlock';
 
@@ -84,22 +68,6 @@ class Main extends Component {
     render() {
         const pages = [
             {page: globalConsts.pages.main, component: MainInfoPage, visible: true, },
-            {page: globalConsts.pages.productsMovements, component: PointSTFF, visible: true, },
-            {page: globalConsts.pages.loadProducts, component: LoadSTFF, visible: false, },
-            {page: globalConsts.pages.washPoint, component: WashingPoint, visible: true, },
-            {page: globalConsts.pages.changeSystemStatus, component: ChangeSystemStatus, visible: true, },
-            {page: globalConsts.pages.outPoints, component: OutPoints, visible: true, },
-            {page: globalConsts.pages.generateDocs, component: GenerateDocs, visible: true, },
-            {page: globalConsts.pages.docSTFF, component: DocForSTFF, visible: false, },
-            {page: globalConsts.pages.docSells, component: DocForSells, visible: false, },
-            {page: globalConsts.pages.docWashing, component: DocForWashing, visible: false, },
-            {page: globalConsts.pages.menuCategories, component: MenuCategories, visible: true, },
-            {page: globalConsts.pages.iUCategory, component: IUCategory, visible: false, },
-            {page: globalConsts.pages.menuDishes, component: MenuDishes, visible: true, },
-            {page: globalConsts.pages.iUDish, component: IUDish, visible: false, },
-            {page: globalConsts.pages.ovenPoints, component: OvenPoints, visible: true, },
-            {page: globalConsts.pages.operators, component: Operators, visible: true, },
-            {page: globalConsts.pages.iOperator, component: IOperator, visible: false, },
             {page: globalConsts.pages.adBlocks, component: AdBlocks, visible: true, },
             {page: globalConsts.pages.iUAdBlocks, component: IUAdBlock, visible: false, },
             {page: globalConsts.pages.user, component: PersonalCab, visible: true, },
