@@ -90,6 +90,7 @@ function getClientEnvironment(publicUrl) {
         IP: prepareUrls(process.env.HTTPS === 'true' ? 'https' : 'http', process.env.HOST || '0.0.0.0', process.env.NODE_ENV === 'development-3000' ? 3000 : 2093).lanUrlForConfig,
       }
     );
+
   // Stringify all values so we can feed into Webpack DefinePlugin
   const stringified = {
     'process.env': Object.keys(raw).reduce((env, key) => {
@@ -97,7 +98,7 @@ function getClientEnvironment(publicUrl) {
       return env;
     }, {}),
   };
-
+  
   return { raw, stringified };
 }
 

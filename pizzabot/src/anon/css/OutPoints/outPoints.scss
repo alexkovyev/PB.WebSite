@@ -1,0 +1,32 @@
+.op_div .dx-list-item {
+    border-top: hidden;
+    border-bottom: hidden;
+}
+
+.op_div .dx-list-group-header {
+    border-top: hidden;
+}
+
+.op_cntrl_div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.op_cntrl_id_div {
+    height: 100px;
+    width: 100px;
+    background-color: lightgrey;
+    border: 0.5px solid black;
+    margin: auto;
+    display: table;
+}
+
+.op_cntrl_status {
+    font-size: 15px;
+    color: black;
+}
+
+.op_cntrl_id {
+    display: table-cell;
+    vertical-align: middle;
+}

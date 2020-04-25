@@ -73,9 +73,11 @@ const resolveModule = (resolveFn, filePath) => {
   return resolveFn(`${filePath}.js`);
 };
 
+//Admin anon 
 const resolveDist = () => {
     switch (envEntryPoint) {
 		case 'admin':
+    case 'anon': return resolveApp('../dist/anon');
 		default:
 			return resolveApp('../dist/admin');
 	}
@@ -84,6 +86,7 @@ const resolveDist = () => {
 const resolveHTML = () => {
     switch (envEntryPoint) {
 		case 'admin':
+    case 'anon': return resolveApp('public/anon/index.html')
 		default:
 			return resolveApp('public/admin/index.html');
 	}
@@ -92,6 +95,7 @@ const resolveHTML = () => {
 const resolveIndex = () => {
     switch (envEntryPoint) {
 		case 'admin':
+    case 'anon': return resolveModule(resolveApp, 'src/anon/index');
 		default:
 			return resolveModule(resolveApp, 'src/admin/index');
 	}
@@ -100,11 +104,11 @@ const resolveIndex = () => {
 const resolvePublic = () => {
     switch (envEntryPoint) {
 		case 'admin':
+    case 'anon': resolveApp('public/anon');
 		default:
 			return resolveApp('public/admin');
 	}
 };
-
 
 // config after eject: we're in ./config/
 module.exports = {
@@ -126,7 +130,5 @@ module.exports = {
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
 };
-
-
 
 module.exports.moduleFileExtensions = moduleFileExtensions;
