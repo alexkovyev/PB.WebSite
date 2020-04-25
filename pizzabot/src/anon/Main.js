@@ -20,9 +20,6 @@ import SlideOutMenu from './SlideOutMenu';
 // Pages
 import HomePage from './js/Views/HomePage/HomePage'
 import SignInAdmin from './js/Views/SignInAdmin/SignInAdmin';
-
-import MainInfoPage from './js/Views/MainInfoPage/MainInfoPage';
-import PersonalCab from './js/Views/PersonalCab/PersonalCab';
 import AdBlocks from './js/Views/AdBlocks/AdBlocks';
 import IUAdBlock from './js/Views/AdBlocks/IUAdBlock';
 
@@ -67,10 +64,8 @@ class Main extends Component {
 
     render() {
         const pages = [
-            {page: globalConsts.pages.main, component: MainInfoPage, visible: true, },
             {page: globalConsts.pages.adBlocks, component: AdBlocks, visible: true, },
             {page: globalConsts.pages.iUAdBlocks, component: IUAdBlock, visible: false, },
-            {page: globalConsts.pages.user, component: PersonalCab, visible: true, },
 
             {button: globalConsts.buttons.logout, action: () => {
                 const { 
