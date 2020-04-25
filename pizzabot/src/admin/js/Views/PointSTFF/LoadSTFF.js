@@ -417,6 +417,10 @@ class LoadSTFF extends React.Component {
         })
     }
 
+    collapseRenderedGroup(e){
+        (e.component).collapseGroup(e.groupIndex);
+    }
+
     render() {
         const {
             actionType,
@@ -465,6 +469,7 @@ class LoadSTFF extends React.Component {
                         hoverStateEnabled={false}
                         activeStateEnabled={false}
                         onItemClick={this.handleMakeMvmntInThisContainer}
+                        onGroupRendered = {this.collapseRenderedGroup}
                         groupRender={(args) => {
                             return (
                                 <div style={{fontSize: '17px'}}>{'Линия п/ф: ' + args.key}</div>
@@ -569,6 +574,7 @@ class LoadSTFF extends React.Component {
                                 hoverStateEnabled={false}
                                 activeStateEnabled={false}
                                 onItemClick={this.handleChooseCellForLoad}
+                                onGroupRendered = {this.collapseRenderedGroup}
                                 groupRender={(args) => {
                                     return (
                                         <div style={{fontSize: '17px'}}>{'Линия п/ф (Контейнер): ' + args.key}</div>
