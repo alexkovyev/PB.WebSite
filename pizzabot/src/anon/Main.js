@@ -64,16 +64,7 @@ class Main extends Component {
 
     render() {
         const pages = [
-            {page: globalConsts.pages.adBlocks, component: AdBlocks, visible: true, },
-            {page: globalConsts.pages.iUAdBlocks, component: IUAdBlock, visible: false, },
-
-            {button: globalConsts.buttons.logout, action: () => {
-                const { 
-                    dispatch
-                } = this.props;
-                dispatch(unmountContext());
-                window.location.reload();
-            }, visible: true, },
+            
         ];
 
         //Redux
@@ -99,13 +90,6 @@ class Main extends Component {
                         <Route path={'/Home'} component={HomePage} />
                         <Route path={'/SignIn'} component={SignInAdmin} />
                     </HashRouter>
-                }
-                {token && context.User && 
-                    <SlideOutMenu 
-                        menuItems={pages}
-                        availablePages={context.Pages}
-                        defaultPage={'Main'}
-                    />
                 }
             </>
         );

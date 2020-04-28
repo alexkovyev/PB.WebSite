@@ -11,5 +11,5 @@ import 'anon/css/anon.index.scss';
 
 ReactDOM.render(
     <Root />,
-    document.getElementById("root_reactapp")
+    document.getElementById("root_reactapp_anon")
 );

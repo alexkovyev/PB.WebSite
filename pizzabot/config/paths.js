@@ -75,11 +75,11 @@ const resolveModule = (resolveFn, filePath) => {
 
 //Admin anon 
 const resolveDist = () => {
-    switch (envEntryPoint) {
-		case 'admin':
+  switch (envEntryPoint) {
+	  case 'admin':
     case 'anon': return resolveApp('../dist/anon');
 		default:
-			return resolveApp('../dist/admin');
+		  return resolveApp('../dist/admin');
 	}
 };
 
