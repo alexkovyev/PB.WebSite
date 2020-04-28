@@ -131,13 +131,13 @@ class MainInfoPage extends React.Component {
                 <div className={'mip_div mt-2'}>
                     <div className={'row text-center mb-4'}> 
                         <div className={'col-6'}>
-                            <h5 className={'text-muted'}>№ заказов в работе</h5>
+                            <h5 className={'text-muted'}>Заказов в работе</h5>
                             <div className={'font-weight-bold'} style={{fontSize: '25px'}}>
                                 {numberOfOrdersNow}
                             </div>
                         </div>
                         <div className={'col-6'}>
-                            <h5 className={'text-muted'}>№ всех заказов за день</h5>
+                            <h5 className={'text-muted'}>Заказов за день</h5>
                             <div className={'font-weight-bold'} style={{fontSize: '25px'}}>
                                 {numberOfAllOrdersToday}
                             </div>
