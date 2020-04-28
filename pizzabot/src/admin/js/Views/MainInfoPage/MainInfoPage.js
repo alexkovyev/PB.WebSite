@@ -1,12 +1,12 @@
 import React from 'react';
 
-// Redux
+//Redux
 import { connect } from 'react-redux';
 import {
     changeVisibilityOfLoadingPanel
 } from 'js/Redux/actions';
 
-// Dx
+//Dx
 import {
     DataGrid
 } from 'devextreme-react';
