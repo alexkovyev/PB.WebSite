@@ -1,23 +1,2 @@
 @import "./HomePage/homePage.scss";
 @import "./SignInAdmin/signInAdmin.scss";
-
-.round-green {
-    width: 28px;
-    height: 28px;
-    background-color: lightgreen;
-    border: 0.5px solid black;
-}
-
-.round-red {
-    width: 28px;
-    height: 28px;
-    background-color: tomato;
-    border: 0.5px solid black;
-}
-
-.round-right {
-    margin-left: auto;
-    margin-right: 0px;
-    margin-top: 10px;
-    margin-bottom: auto;
-}

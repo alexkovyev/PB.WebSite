@@ -130,13 +130,6 @@ class Main extends Component {
                     visible={isLoading}
                 />
 
-                {!token && !context.User &&
-                    <HashRouter hashType={'noslash'}>
-                        <Redirect from='/' to='/Home' exact />
-                        <Route path={'/Home'} component={HomePage} />
-                        <Route path={'/SignIn'} component={SignInAdmin} />
-                    </HashRouter>
-                }
                 {token && context.User && 
                     <SlideOutMenu 
                         menuItems={pages}

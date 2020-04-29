@@ -76,17 +76,19 @@ const resolveModule = (resolveFn, filePath) => {
 //Admin anon 
 const resolveDist = () => {
   switch (envEntryPoint) {
+    case 'anon': 
+      return resolveApp('../dist/anon');
 	  case 'admin':
-    case 'anon': return resolveApp('../dist/anon');
 		default:
 		  return resolveApp('../dist/admin');
 	}
 };
 
 const resolveHTML = () => {
-    switch (envEntryPoint) {
+  switch (envEntryPoint) {
+    case 'anon': 
+      return resolveApp('public/anon/index.html')
 		case 'admin':
-    case 'anon': return resolveApp('public/anon/index.html')
 		default:
 			return resolveApp('public/admin/index.html');
 	}

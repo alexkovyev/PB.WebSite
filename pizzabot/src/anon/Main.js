@@ -6,22 +6,12 @@ import {
     Redirect
 } from 'react-router-dom';
 
-// Actions
-import {
-
-} from 'js/Redux/actions';
-
 // Dx
 import { LoadPanel } from 'devextreme-react';
-
-// Local cntrls
-import SlideOutMenu from './SlideOutMenu';
 
 // Pages
 import HomePage from './js/Views/HomePage/HomePage'
 import SignInAdmin from './js/Views/SignInAdmin/SignInAdmin';
-import AdBlocks from './js/Views/AdBlocks/AdBlocks';
-import IUAdBlock from './js/Views/AdBlocks/IUAdBlock';
 
 // Redux store, actions, helpers.
 import { connect, Provider } from 'react-redux';
@@ -63,10 +53,6 @@ class Main extends Component {
     }
 
     render() {
-        const pages = [
-            
-        ];
-
         //Redux
         const {
             isLoading,
