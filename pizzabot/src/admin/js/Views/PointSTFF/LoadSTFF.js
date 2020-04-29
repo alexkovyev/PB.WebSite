@@ -12,7 +12,8 @@ import {
 import {
     SelectBox, 
     Button,
-    List
+    List,
+    ScrollView
 } from 'devextreme-react';
 import {
     Popup
@@ -510,101 +511,110 @@ class LoadSTFF extends React.Component {
                         disabled={(Object.keys(loadSTFF).length > 0 || Object.keys(unloadSTFF).length > 0) ? false : true}
                     />
                 </div>
-                <Popup
-                    visible={containerInfoPopupVisible}
-                    onHiding={this.handleHidingPopup}
-                    dragEnabled={false}
-                    closeOnOutsideClick={true}
-                    showTitle={true}
-                    title="Ячейки контейнера"
-                    fullScreen={true}
-                >
-                    <div className={'pstf_ppp_container_map'}>
-                        {stffCellCode && 
-                            <>
-                                <div className={'mb-2'}>
-                                    <div className={'form-group text-left'}>
-                                        <label>{`Ввести полуфабрикат для ячейки ${stffCellCode}`}</label>
-                                        <div className={'mb-1'}>
-                                            <SelectBox 
-                                                dataSource={stffs}
-                                                valueExpr={'refid'}
-                                                displayExpr={'stffname'}
-                                                value={stffForLoad}
-                                                searchEnabled={true}
-                                                placeholder={'Выберите ячейку п/ф...'}
-                                                onValueChanged={this.handleChangeStffForCell}
-                                            />
-                                        </div>
-                                        <div className={'pstf_footer text-center mt-2'}>
-                                            <Button 
-                                                height={'50px'}
-                                                text={'Добавить полуфабрикат'}
-                                                width={'80%'}
-                                                onClick={this.handleAddStffToCell}
-                                            />
+                 <Popup
+                        height= '100%'
+                        visible={containerInfoPopupVisible}
+                        onHiding={this.handleHidingPopup}
+                        dragEnabled={false}
+                        closeOnOutsideClick={true}
+                        showTitle={true}
+                        title="Ячейки контейнера"
+                        fullScreen={true}
+                    >
+                        <ScrollView
+                                height = '100%'
+                                width = '100%'
+                                scrollByContent={true}
+                                bounceEnabled={false}
+                                showScrollbar='always'
+                                scrollByThumb={true}>
+                            <div className={'pstf_ppp_container_map'}>
+                            {stffCellCode && 
+                                <>
+                                    <div className={'mb-2'}>
+                                        <div className={'form-group text-left'}>
+                                            <label>{`Ввести полуфабрикат для ячейки ${stffCellCode}`}</label>
+                                            <div className={'mb-1'}>
+                                                <SelectBox 
+                                                    dataSource={stffs}
+                                                    valueExpr={'refid'}
+                                                    displayExpr={'stffname'}
+                                                    value={stffForLoad}
+                                                    searchEnabled={true}
+                                                    placeholder={'Выберите ячейку п/ф...'}
+                                                    onValueChanged={this.handleChangeStffForCell}
+                                                />
+                                            </div>
+                                            <div className={'pstf_footer text-center mt-2'}>
+                                                <Button 
+                                                    height={'50px'}
+                                                    text={'Добавить полуфабрикат'}
+                                                    width={'80%'}
+                                                    onClick={this.handleAddStffToCell}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
+                                    <hr />
+                                </>
+                            }
+                            {!stffCellCode &&
+                                <div className={'pstf_footer text-center'}>
+                                    <Button 
+                                        onClick={this.handleLoadContainer} 
+                                        text={'Загрузить контейнер'}
+                                        height={'50px'}
+                                        width={'80%'}
+                                    />
                                 </div>
-                                <hr />
-                            </>
-                        }
-                        {!stffCellCode &&
-                            <div className={'pstf_footer text-center'}>
-                                <Button 
-                                    onClick={this.handleLoadContainer} 
-                                    text={'Загрузить контейнер'}
-                                    height={'50px'}
-                                    width={'80%'}
+                            }
+                            <div className={'pstf_ppp_con'}>
+                                <List 
+                                    dataSource={containerInfoPopupData.names}
+                                    height={'100%'}
+                                    grouped={true}
+                                    collapsibleGroups={true}
+                                    focusStateEnabled={false}
+                                    hoverStateEnabled={false}
+                                    activeStateEnabled={false}
+                                    onItemClick={this.handleChooseCellForLoad}
+                                    groupRender={(args) => {
+                                        return (
+                                            <div style={{fontSize: '17px'}}>{'Линия п/ф (Контейнер): ' + args.key}</div>
+                                        )
+                                    }}
+                                    itemTemplate={(args, index, component) => {
+                                        var lineContainer = component.parentElement;
+                                        var container = lineContainer.parentElement;
+                                        if (container.className.indexOf('row') < 0) {
+                                            component.parentElement.parentElement.className += ' row';
+                                        }
+                                        if (lineContainer.className.indexOf('col-4') < 0) {
+                                            component.parentElement.className += ' col-4 mb-2 mt-2';
+                                        }
+                                        
+                                        return ReactDOM.render(
+                                            (
+                                                <>
+                                                    <div className={'pstf_container_div text-center'}>
+                                                        <div className={'pstf_container_id_div ' + (
+                                                            loadContainer.hasOwnProperty(args.cellName) 
+                                                                ? 'pstf_container_id_div_green' 
+                                                                : 'pstf_container_id_div_gray'
+                                                        )}> 
+                                                            <h4 className={'pstf_container_id'}>{args.cellName}</h4>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            ),
+                                            component
+                                        )
+                                    }}
                                 />
                             </div>
-                        }
-                        <div className={'pstf_ppp_con'}>
-                            <List 
-                                dataSource={containerInfoPopupData.names}
-                                height={'100%'}
-                                grouped={true}
-                                collapsibleGroups={true}
-                                focusStateEnabled={false}
-                                hoverStateEnabled={false}
-                                activeStateEnabled={false}
-                                onItemClick={this.handleChooseCellForLoad}
-                                groupRender={(args) => {
-                                    return (
-                                        <div style={{fontSize: '17px'}}>{'Линия п/ф (Контейнер): ' + args.key}</div>
-                                    )
-                                }}
-                                itemTemplate={(args, index, component) => {
-                                    var lineContainer = component.parentElement;
-                                    var container = lineContainer.parentElement;
-                                    if (container.className.indexOf('row') < 0) {
-                                        component.parentElement.parentElement.className += ' row';
-                                    }
-                                    if (lineContainer.className.indexOf('col-4') < 0) {
-                                        component.parentElement.className += ' col-4 mb-2 mt-2';
-                                    }
-                                    
-                                    return ReactDOM.render(
-                                        (
-                                            <>
-                                                <div className={'pstf_container_div text-center'}>
-                                                    <div className={'pstf_container_id_div ' + (
-                                                        loadContainer.hasOwnProperty(args.cellName) 
-                                                            ? 'pstf_container_id_div_green' 
-                                                            : 'pstf_container_id_div_gray'
-                                                    )}> 
-                                                        <h4 className={'pstf_container_id'}>{args.cellName}</h4>
-                                                    </div>
-                                                </div>
-                                            </>
-                                        ),
-                                        component
-                                    )
-                                }}
-                            />
                         </div>
-                    </div>
-                </Popup>
+                        </ScrollView>
+                    </Popup>
             </>
         )
     }
