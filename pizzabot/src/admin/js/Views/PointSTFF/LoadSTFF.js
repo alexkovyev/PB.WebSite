@@ -48,6 +48,12 @@ class LoadSTFF extends React.Component {
             stffCellCode: '',
         }
 
+        this.refs = null
+
+        this.setListRef = element => {
+            this.refs = element
+        }
+
         this.showConfirmationMsg = (messageHtml, title) => {
             return custom({
                 title: title,
@@ -154,6 +160,15 @@ class LoadSTFF extends React.Component {
                 dispatch(changeVisibilityOfLoadingPanel(false));
             }
         )
+        
+    }
+
+    componentDidUpdate(){
+        let list = this.refs.instance
+        var n = this.state.fridgeMap.length
+        for (var i = 0; i < n; i++) {
+            list.collapseGroup(i)
+        }
     }
 
     sendHistoryOfUser() {
@@ -418,6 +433,10 @@ class LoadSTFF extends React.Component {
         })
     }
 
+    collapseRenderedGroup(e){
+        (e.component).collapseGroup(e.groupIndex);
+    }
+
     render() {
         const {
             actionType,
@@ -457,7 +476,8 @@ class LoadSTFF extends React.Component {
                     </div>
                 </div>
                 <div className={'pstf_fridge_map'}>
-                    <List 
+                    <List
+                        ref = {this.setListRef}
                         dataSource={fridgeMap}
                         height={'100%'}
                         grouped={true}
@@ -466,6 +486,13 @@ class LoadSTFF extends React.Component {
                         hoverStateEnabled={false}
                         activeStateEnabled={false}
                         onItemClick={this.handleMakeMvmntInThisContainer}
+                        //onGroupRendered = {this.collapseRenderedGroup}
+                        /*onContentReady = {(e) => {
+                            var items = e.component.option("items");
+                            for (var i = 0; i < items.length; i++)
+                                e.component.collapseGroup(i);
+                            //console.log(this.listRef)
+                        }}*/
                         groupRender={(args) => {
                             return (
                                 <div style={{fontSize: '17px'}}>{'Линия п/ф: ' + args.key}</div>
@@ -612,7 +639,7 @@ class LoadSTFF extends React.Component {
                                     }}
                                 />
                             </div>
-                        </div>
+                            </div>
                         </ScrollView>
                     </Popup>
             </>
