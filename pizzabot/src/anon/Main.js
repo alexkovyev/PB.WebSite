@@ -60,7 +60,6 @@ class Main extends Component {
         } = this.props;
 
         const token = globalFuncs.getToken();
-        console.log(context);
 
         return (
             <>

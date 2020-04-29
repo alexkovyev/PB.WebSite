@@ -18,9 +18,6 @@ import { LoadPanel } from 'devextreme-react';
 import SlideOutMenu from './SlideOutMenu';
 
 // Pages
-import HomePage from './js/Views/HomePage/HomePage'
-import SignInAdmin from './js/Views/SignInAdmin/SignInAdmin';
-
 import MainInfoPage from './js/Views/MainInfoPage/MainInfoPage';
 import ChangeSystemStatus from './js/Views/ChangeSystemStatus/ChangeSystemStatus';
 import PersonalCab from './js/Views/PersonalCab/PersonalCab';
@@ -120,7 +117,6 @@ class Main extends Component {
         } = this.props;
 
         const token = globalFuncs.getToken();
-        console.log(context);
 
         return (
             <>
