@@ -414,7 +414,7 @@ router.post('/cntrls/upd_points', (req, res) => {
   const userprofilerefid = req.body.userprofilerefid;
 
   successFunc = (data) => {
-    if (data && data[0]['fn_updoutpoints']) {
+    if (data && data[0]['fn_updpoints']) {
       return res.status(200).json({isSuccess: true});
     } else {
       return res.status(200).json({
